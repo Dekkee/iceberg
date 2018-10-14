@@ -12,7 +12,8 @@ export const config = {
     devServer: {
         compress: true,
         contentBase: './dist',
-        hot: true
+        hot: true,
+        port: 8082
     },
     devtool: 'cheap-source-map',
 };
