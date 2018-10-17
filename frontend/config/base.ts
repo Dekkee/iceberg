@@ -27,7 +27,8 @@ export const config: webpack.Configuration = ({
         ]
     },
     output: {
-        path: path.resolve(__dirname, '..', 'dist')
+        path: path.resolve(__dirname, '..', 'dist'),
+        publicPath: '/',
     },
     plugins: [
         new CleanWebpackPlugin([ 'dist' ]),
