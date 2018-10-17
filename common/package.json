@@ -1,0 +1,14 @@
+{
+  "name": "common",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@types/lodash": "^4.14.117",
+    "@types/react-redux": "^6.0.9",
+    "lodash-es": "^4.17.11",
+    "react": "^16.5.2",
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.1"
+  }
+}
