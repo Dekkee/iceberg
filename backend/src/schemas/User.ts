@@ -60,7 +60,8 @@ userSchema.virtual('password')
 userSchema.methods.checkPassword = function (password: string) {
     if (!password) return false;
     if (!this.passwordHash) return false;
-    return pbkdf2Sync(password, this.salt, 1, 128, 'sha1') === this.passwordHash;
+    const hash = pbkdf2Sync(password, this.salt, 1, 128, 'sha1').toString();
+    return hash === this.passwordHash;
 };
 
 export const User = model<UserModel & Document>('User', userSchema);

@@ -20,4 +20,4 @@ export const adminUser = new Roles({
     }
 });
 
-adminUser.use(ACCESS_ADMIN_PAGES, (req) => req.isAuthenticated() && req.user.isAdmin);
+adminUser.use(ACCESS_ADMIN_PAGES, (req, res) => req.isAuthenticated() && req.user.isAdmin);

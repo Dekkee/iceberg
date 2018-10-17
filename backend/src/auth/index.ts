@@ -1,10 +1,23 @@
-import { Strategy as LocalStrategy } from "passport-local";
-import { User } from "../schemas/User";
-import { ExtractJwt, Strategy as JwtStrategy } from "passport-jwt";
-import { jwtsecret } from "./secret";
-import { PassportStatic } from "passport";
+import { Strategy as LocalStrategy } from 'passport-local';
+import { User, UserModel } from '../schemas/User';
+import { ExtractJwt, Strategy as JwtStrategy } from 'passport-jwt';
+import { jwtsecret } from './secret';
+import { PassportStatic } from 'passport';
 
 export const setup = (passport: PassportStatic) => {
+    passport.serializeUser<UserModel, string>(function (user, cb) {
+        cb(null, user.email);
+    });
+
+    passport.deserializeUser(function (id, cb) {
+        User.findById(id, function (err, user) {
+            if (err) {
+                return cb(err);
+            }
+            cb(null, user);
+        });
+    });
+
     passport.use(new LocalStrategy({
             usernameField: 'email',
             passwordField: 'password',
@@ -31,16 +44,16 @@ export const setup = (passport: PassportStatic) => {
     };
 
     passport.use(new JwtStrategy(jwtOptions, function (payload, done) {
-            User.findById(payload.id, (err, user) => {
+        User.findById(payload.id, (err, user) => {
                 if (err) {
-                    return done(err)
+                    return done(err);
                 }
                 if (user) {
-                    done(null, user)
+                    done(null, user);
                 } else {
-                    done(null, false)
+                    done(null, false);
                 }
-            })
+            });
         })
     );
 };

@@ -1,8 +1,11 @@
 import UserRepository from "../schemas/UserRepository";
 import { ACCESS_ADMIN_PAGES, adminUser } from "../roles/admin";
 import { Router } from "express";
+import * as passport from 'passport';
 
 export const setup = (router: Router) => {
+    router.use('/api/admin/user', passport.authenticate('jwt'), adminUser.can(ACCESS_ADMIN_PAGES));
+
     router.get('/api/admin/user', async (req, res) => {
         try {
             const rep = new UserRepository();
@@ -16,7 +19,7 @@ export const setup = (router: Router) => {
         }
     });
 
-    router.get('/api/admin/user/:id', adminUser.can(ACCESS_ADMIN_PAGES), async (req, res) => {
+    router.get('/api/admin/user/:id', async (req, res) => {
         try {
             res.send(await new UserRepository().get(req.params.id));
         }
@@ -25,7 +28,7 @@ export const setup = (router: Router) => {
         }
     });
 
-    router.put('/api/admin/user', adminUser.can(ACCESS_ADMIN_PAGES), async (req, res) => {
+    router.put('/api/admin/user', async (req, res) => {
         try {
             res.send(await new UserRepository().put(req.body));
         }
@@ -34,7 +37,7 @@ export const setup = (router: Router) => {
         }
     });
 
-    router.delete('/api/admin/user', adminUser.can(ACCESS_ADMIN_PAGES), async (req, res) => {
+    router.delete('/api/admin/user', async (req, res) => {
         try {
             res.send(await new UserRepository().delete(req.body));
         }
