@@ -1,22 +1,56 @@
-import * as Koa from "koa";
-import * as Router from "koa-router";
-import * as bodyParser from "koa-bodyparser";
-import * as serve from "koa-static";
-import * as logger from "koa-logger";
-import * as passport from "koa-passport";
-import * as mongoose from "mongoose";
-import * as crypto from "crypto";
+import * as express from 'express';
+import * as bodyParser from 'body-parser';
+import * as passport from 'passport';
+import * as mongoose from 'mongoose';
+import * as morgan from 'morgan';
+import * as cors from 'cors';
+import * as serve from 'serve-static';
+import { setup as setupApi } from './api';
+import { setup as setupPassport } from './auth';
+import { User } from './schemas/User';
+import UserRepository from './schemas/UserRepository';
 
-const app = new Koa();
-const router = new Router();
+const app = express();
+const router = express.Router();
+
 app.use(serve('public'));
-app.use(logger());
-app.use(bodyParser());
-app.use(passport.initialize()); // сначала passport
-app.use(router.routes()); // потом маршруты
+app.use(morgan(':method :url -> :status'));
+app.use(bodyParser.urlencoded({ extended: true }))
+    .use(bodyParser.json());
 
-mongoose.Promise = Promise;
-mongoose.set('debug', true);
-mongoose.connect('mongodb://localhost/iceberg');
+const nodeEnv = process.env.NODE_ENV;
+
+if (nodeEnv !== 'produnction') {
+    app.use(cors());
+}
+
+app.set('view engine', 'pug');
+
+app.use(passport.initialize());
+app.use(router);
 
 const server = app.listen(3000);// запускаем сервер на порту 3000
+
+(mongoose.Promise as any) = Promise;
+mongoose.set('debug', true);
+mongoose.connect('mongodb://localhost/iceberg', { useNewUrlParser: true });
+
+const adminUser = {
+    email: '1',
+    password: '1',
+    isAdmin: true,
+};
+
+User.findOne({ email: adminUser.email }, (err, user) => {
+    if (err) {
+        console.error(err);
+        return;
+    }
+
+    if (!user) {
+        new UserRepository().put(adminUser);
+    }
+});
+
+setupPassport(passport);
+setupApi(router);

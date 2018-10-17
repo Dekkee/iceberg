@@ -1,0 +1,9 @@
+FROM node:alpine
+
+ADD package.json /tmp/package.json
+ADD yarn.lock /tmp/yarn.lock
+RUN cd /tmp && yarn install --freeze-lockfile && mkdir -p /app && cp -a /tmp/node_modules /app/
+
+COPY . /app
+WORKDIR /app
+ENTRYPOINT [ "yarn", "run", "start", "-p=8000" ]
