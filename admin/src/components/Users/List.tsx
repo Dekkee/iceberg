@@ -38,11 +38,10 @@ export class UserList extends React.Component<Props> {
 
     render () {
         const { users } = this.props;
-        console.log(users);
         return (
             <div>
                 Юзиры
-                { users && users.map((user) => <div>{user.email}</div>) }
+                { users && users.map((user, i) => <div key={i}>{user.email}</div>) }
             </div>
         );
     }

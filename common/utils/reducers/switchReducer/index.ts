@@ -9,7 +9,7 @@ export const switchCase = <R> (actionCreator: ActionCreator<R>) => <S> (reducer:
     [actionCreator.type]: reducer,
 });
 
-export const switchMultipleCase = <R> (actionCreators: Array<ActionCreator<R>>) =>
+export const switchMultipleCase = <R> (...actionCreators: ActionCreator<R>[]) =>
     <S> (reducer: Reducer<S, R>): SwitchCase<S, R> => actionCreators.reduce((acc, val) => {
         acc[val.type] = reducer;
         return acc;

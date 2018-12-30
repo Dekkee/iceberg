@@ -7,7 +7,7 @@ import * as cors from 'cors';
 import * as serve from 'serve-static';
 import { setup as setupApi } from './api';
 import { setup as setupPassport } from './auth';
-import { User } from './schemas/User';
+import { User, UserModel } from './schemas/User';
 import UserRepository from './schemas/UserRepository';
 import { adminUser } from './roles/admin';
 
@@ -35,7 +35,8 @@ const server = app.listen(3000);// запускаем сервер на порт
 
 (mongoose.Promise as any) = Promise;
 mongoose.set('debug', true);
-mongoose.connect('mongodb://localhost/iceberg', { useNewUrlParser: true });
+mongoose.connect('mongodb://localhost/iceberg', { useNewUrlParser: true })
+    .then(() => console.log('Mongoose connected'));
 
 const defaultAdmin = {
     email: '1',
@@ -50,7 +51,7 @@ User.findOne({ email: defaultAdmin.email }, (err, user) => {
     }
 
     if (!user) {
-        new UserRepository().put(defaultAdmin);
+        User.create(defaultAdmin).then(() => console.log('Default admin created'));
     }
 });
 

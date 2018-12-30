@@ -4,7 +4,11 @@ import {
     AuthenticateActionInit,
     AuthenticateActionDone,
     AuthenticateActionFail,
-    CancelAuthenticationActionInit
+    CancelAuthenticationAction,
+    LogoutAction,
+    RefreshAuthenticationAction,
+    RefreshAuthenticationActionDone,
+    RefreshAuthenticationActionFail
 } from '../actions/auth';
 import { persistReducer } from '../../../common/utils/reducers/persistReducer';
 
@@ -34,7 +38,23 @@ export const authReducer = switchReducer<AuthState>({
         ...state,
         isAuthenticated: false,
     })),
-    ...switchCase(actions.cancel)((state: AuthState, action: CancelAuthenticationActionInit): AuthState => ({
+    ...switchCase(actions.refresh.init)((state: AuthState, action: RefreshAuthenticationAction): AuthState => ({
+        ...state,
+        isAuthenticated: false,
+    })),
+    ...switchCase(actions.refresh.done)((state: AuthState, action: RefreshAuthenticationActionDone): AuthState => ({
+        ...state,
+        isAuthenticated: true,
+    })),
+    ...switchCase(actions.refresh.fail)((state: AuthState, action: RefreshAuthenticationActionFail): AuthState => ({
+        ...state,
+        isAuthenticated: false,
+    })),
+    ...switchCase(actions.cancel)((state: AuthState, action: CancelAuthenticationAction): AuthState => ({
+        ...state,
+        isAuthenticated: false,
+    })),
+    ...switchCase(actions.logout)((state: AuthState, action: LogoutAction): AuthState => ({
         ...state,
         isAuthenticated: false,
     })),
@@ -56,7 +76,23 @@ export const tokenReducer = persistReducer('auth', switchReducer<TokenState>({
         token: undefined,
         user: undefined,
     })),
-    ...switchCase(actions.cancel)((state: TokenState, action: CancelAuthenticationActionInit): TokenState => ({
+    ...switchCase(actions.refresh.init)((state: TokenState, action: RefreshAuthenticationAction): TokenState => ({
+        ...state,
+    })),
+    ...switchCase(actions.refresh.done)((state: TokenState, action: RefreshAuthenticationActionDone): TokenState => ({
+        ...state,
+    })),
+    ...switchCase(actions.refresh.fail)((state: TokenState, action: RefreshAuthenticationActionFail): TokenState => ({
+        ...state,
+        token: undefined,
+        user: undefined,
+    })),
+    ...switchCase(actions.cancel)((state: TokenState, action: CancelAuthenticationAction): TokenState => ({
+        ...state,
+        token: undefined,
+        user: undefined,
+    })),
+    ...switchCase(actions.logout)((state: TokenState, action: LogoutAction): TokenState => ({
         ...state,
         token: undefined,
         user: undefined,

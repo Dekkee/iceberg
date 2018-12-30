@@ -44,3 +44,13 @@ export const login = async (email: string, password: string): Promise<Authentica
     checkStatus(response);
     return await response.json();
 };
+
+export const refresh = async (token: string): Promise<void> => {
+    const response = await fetch(resolveUrl('custom'), {
+        method: 'GET',
+        headers: {
+            'Authorization': token
+        }
+    });
+    checkStatus(response);
+};

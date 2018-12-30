@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Menu } from './layout/Menu';
-import { Route, Switch } from 'react-router';
+import { Route, Switch, withRouter } from 'react-router';
 import { Users } from './components/Users';
-import { authSelector } from './selectors/auth';
+import { authSelector, tokenSelector } from './selectors/auth';
 import { actions } from './actions/auth';
 import { connect } from '../../common/utils/connect';
 import { Action } from 'redux';
@@ -13,27 +13,29 @@ import { ChangeEvent } from 'react';
 import Button from '@material-ui/core/Button/Button';
 
 import './App.scss';
+import { AuthState, TokenState } from './reducers/auth';
 
 interface State {
     email: string;
     password: string;
 }
 
-type Props = StateProps & DispatchProps & { classes?: any };
+type StateProps = Partial<AuthState> & TokenState;
 
-interface StateProps {
-    isAuthenticated?: boolean;
-    user?: string;
-}
+type Props = StateProps & DispatchProps & { classes?: any };
 
 interface DispatchProps {
     login?: (email: string, password: string) => Action;
+    refresh?: (token: string) => Action;
+    logout?: () => Action;
 }
 
-const mapStateToProps = (state): StateProps => authSelector(state);
+const mapStateToProps = (state): StateProps => ({ ...authSelector(state), ...tokenSelector(state) });
 
 const mapDispatchToProps: DispatchProps = {
     login: actions.auth.init,
+    refresh: actions.refresh.init,
+    logout: actions.logout,
 };
 
 @compose(withStyles(theme => ({
@@ -56,10 +58,16 @@ const mapDispatchToProps: DispatchProps = {
         margin: theme.spacing.unit,
     },
 })))
+@compose(withRouter)
 @connect(mapStateToProps, mapDispatchToProps)
 export class App extends React.Component<Props, State> {
-    constructor (props) {
+    constructor (props: Props) {
         super(props);
+
+        const { isAuthenticated, token, refresh } = props;
+        if (!isAuthenticated && !!token) {
+            refresh(token);
+        }
 
         this.state = {
             email: '',
@@ -74,9 +82,13 @@ export class App extends React.Component<Props, State> {
         });
     };
 
-    handleLogin() {
+    handleLogin () {
         const { email, password } = this.state;
         this.props.login(email, password);
+    };
+
+    handleLogout () {
+        this.props.logout();
     };
 
     render () {
@@ -89,7 +101,7 @@ export class App extends React.Component<Props, State> {
                     isAuthenticated
                         ? (
                             <div>
-                                <Menu/>
+                                <Menu onLogout={ this.handleLogout.bind(this) }/>
                                 <Switch>
                                     <Route path="/admin/users" component={ Users }/>
                                 </Switch>

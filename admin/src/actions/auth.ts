@@ -15,7 +15,22 @@ export interface AuthenticateActionFail extends Action {
     error: Error;
 }
 
-export interface CancelAuthenticationActionInit extends Action {
+export interface RefreshAuthenticationAction extends Action {
+    token: string;
+}
+
+export interface RefreshAuthenticationActionDone extends Action {
+}
+
+export interface RefreshAuthenticationActionFail extends Action {
+    error: Error;
+}
+
+export interface CancelAuthenticationAction extends Action {
+
+}
+
+export interface LogoutAction extends Action {
 
 }
 
@@ -25,7 +40,13 @@ export const actions = {
         done: action((response: AuthenticationResponse) => ({ response })),
         fail: action((error: Error) => ({ error })),
     },
-    cancel: action(() => ({}))
+    refresh: {
+        init: action((token) => ({ token })),
+        done: action(() => ({  })),
+        fail: action((error: Error) => ({ error })),
+    },
+    cancel: action(() => ({})),
+    logout: action(() => ({})),
 };
 
 initActionCreators('auth', actions);
