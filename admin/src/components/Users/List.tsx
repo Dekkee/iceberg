@@ -14,6 +14,7 @@ import { history } from '../../history';
 import { compose } from 'recompose';
 import { withStyles } from '@material-ui/core';
 import { WithStyles } from '../../../../common/styles/WithStyles';
+import { ProgressOverlay } from '../ProgessOverlay/ProgressOverlay';
 
 interface DispatchProps {
     loadUsers?: () => Action;
@@ -56,14 +57,17 @@ export class UserList extends React.Component<Props & RouteComponentProps & With
         const { users, match, classes } = this.props;
 
         return (<>
-            <Typography className={classes.header} variant="h5" component="h3">
+            <Typography className={ classes.header } variant="h5" component="h3">
                 Пользователи
                 <Button onClick={ () => history.push(`${ match.url }/create`) }
                         variant="contained"><AddIcon/>Добавить</Button>
             </Typography>
-            <List>
-            { users && users.map((user, i) => <ListItem key={ i }>{ user.email }</ListItem>) }
-            </List>
+
+            <ProgressOverlay inProgress={ false }>
+                <List>
+                    { users && users.map((user, i) => <ListItem key={ i }>{ user.email }</ListItem>) }
+                </List>
+            </ProgressOverlay>
         </>);
     }
 }

@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Form, FormAction } from '../Form';
 import { InputString } from '../Form/InputString';
 import Typography from '@material-ui/core/Typography';
+import { ProgressOverlay } from '../ProgessOverlay/ProgressOverlay';
 
 export interface FormState {
     email: string;
@@ -27,9 +28,11 @@ export const getUserForm = (action: FormAction, id?: string) => {
             { action === FormAction.Edit && 'Редактирование пользователя' }
             { action === FormAction.Read && `Пользователь ${ initialState.name }` }
         </Typography>
-        <UserForm initial={ initialState } action={ action }>
-            <InputString title="E-mail" name="email" id="email-input"/>
-            <InputString title="Имя" name="name" id="name-input"/>
-        </UserForm>
+        <ProgressOverlay inProgress={ false }>
+            <UserForm initial={ initialState } action={ action }>
+                <InputString title="E-mail" name="email" id="email-input"/>
+                <InputString title="Имя" name="name" id="name-input"/>
+            </UserForm>
+        </ProgressOverlay>
     </>);
 };
