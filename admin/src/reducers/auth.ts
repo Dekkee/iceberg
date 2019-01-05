@@ -21,45 +21,6 @@ export interface TokenState {
     user?: string;
 }
 
-const initialState: AuthState = {
-    isAuthenticated: false,
-};
-
-export const authReducer = switchReducer<AuthState>({
-    ...switchCase(actions.auth.init)((state: AuthState, action: AuthenticateActionInit): AuthState => ({
-        ...state,
-        isAuthenticated: false,
-    })),
-    ...switchCase(actions.auth.done)((state: AuthState, action: AuthenticateActionDone): AuthState => ({
-        ...state,
-        isAuthenticated: true,
-    })),
-    ...switchCase(actions.auth.fail)((state: AuthState, action: AuthenticateActionFail): AuthState => ({
-        ...state,
-        isAuthenticated: false,
-    })),
-    ...switchCase(actions.refresh.init)((state: AuthState, action: RefreshAuthenticationAction): AuthState => ({
-        ...state,
-        isAuthenticated: false,
-    })),
-    ...switchCase(actions.refresh.done)((state: AuthState, action: RefreshAuthenticationActionDone): AuthState => ({
-        ...state,
-        isAuthenticated: true,
-    })),
-    ...switchCase(actions.refresh.fail)((state: AuthState, action: RefreshAuthenticationActionFail): AuthState => ({
-        ...state,
-        isAuthenticated: false,
-    })),
-    ...switchCase(actions.cancel)((state: AuthState, action: CancelAuthenticationAction): AuthState => ({
-        ...state,
-        isAuthenticated: false,
-    })),
-    ...switchCase(actions.logout)((state: AuthState, action: LogoutAction): AuthState => ({
-        ...state,
-        isAuthenticated: false,
-    })),
-}, initialState);
-
 export const tokenReducer = persistReducer('auth', switchReducer<TokenState>({
     ...switchCase(actions.auth.init)((state: TokenState, action: AuthenticateActionInit): TokenState => ({
         ...state,
