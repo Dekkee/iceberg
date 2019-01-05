@@ -2,12 +2,17 @@ import * as React from 'react';
 import { FormFieldHoc, withFormContext } from './FormField';
 import { FormContext } from './FormContext';
 import { FormAction } from './Form';
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
+import ListItem from '@material-ui/core/ListItem';
 
 export interface Props<FS extends {}> {
     title: string;
     value?: string;
     name: keyof FS;
     formContext?: FormContext<FS>;
+    id: string;
 }
 
 interface State {
@@ -43,12 +48,17 @@ export class InputString<FS> extends FormFieldHoc<FS, Props<FS>, State> {
     }
 
     render (): React.ReactNode {
-        const { title, formContext, name } = this.props;
+        const { title, formContext, name, id } = this.props;
         const value = formContext.formState[ name as string ];
-        return (<label>
-            { title }
-            <input onChange={ this.onChange.bind(this) } disabled={ formContext.action === FormAction.Read }
-                   value={ value }/>
-        </label>);
+        return (<ListItem>
+            <FormControl>
+                <InputLabel htmlFor={ id }>{ title }</InputLabel>
+                <Input onChange={ this.onChange.bind(this) }
+                       id={ id }
+                       disabled={ formContext.action === FormAction.Read }
+                       value={ value }
+                       fullWidth/>
+            </FormControl>
+        </ListItem>);
     }
 }

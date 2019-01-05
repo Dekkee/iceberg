@@ -102,9 +102,11 @@ export class App extends React.Component<Props, State> {
                         ? (
                             <div>
                                 <Menu onLogout={ this.handleLogout.bind(this) }/>
-                                <Switch>
-                                    <Route path="/admin/users" component={ Users }/>
-                                </Switch>
+                                <div className="content">
+                                    <Switch>
+                                        <Route path="/admin/users" component={ Users }/>
+                                    </Switch>
+                                </div>
                             </div>
                         )
                         : <form action="/api/admin/login" method="POST">

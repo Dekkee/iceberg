@@ -4,14 +4,25 @@ import { UserList } from './List';
 import { compose } from 'recompose';
 import { getUserForm } from './Form';
 import { FormAction } from '../Form';
+import Paper from '@material-ui/core/Paper';
 
-@compose(withRouter)
-export class Users extends React.Component<{} & RouteComponentProps> {
+import { withStyles } from '@material-ui/core';
+
+const styles = theme => ({
+    root: {
+        ...theme.mixins.gutters(),
+        paddingTop: theme.spacing.unit * 2,
+        paddingBottom: theme.spacing.unit * 2,
+    },
+});
+
+@compose(withStyles(styles), withRouter)
+export class Users extends React.Component<{ classes?: any } & RouteComponentProps> {
     render () {
-        const { match } = this.props;
+        const { match, classes } = this.props;
 
         return (
-            <div>
+            <Paper className={classes.root} elevation={1}>
                 <Switch>
                     <Route path={ `${ match.url }/create` }
                            children={ ({ match }) => (getUserForm(FormAction.Add)) }/>
@@ -21,7 +32,7 @@ export class Users extends React.Component<{} & RouteComponentProps> {
                            children={ ({ match }) => (getUserForm(FormAction.Read, match.params.id)) }/>
                     <Route path={ `${ match.url }/` } component={ UserList }/>
                 </Switch>
-            </div>
+            </Paper>
         );
     }
 }
