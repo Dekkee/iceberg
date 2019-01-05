@@ -1,28 +1,32 @@
 import * as React from 'react';
 import { FormFieldHoc, withFormContext } from './FormField';
+import { FormContext } from './FormContext';
+import { FormAction } from './Form';
 
-export interface Props {
+export interface Props<FS extends {}> {
     title: string;
+    value?: string;
+    name: keyof FS;
+    formContext?: FormContext<FS>;
 }
 
 interface State {
-    value: string;
     error?: string;
 }
 
 @withFormContext
-export class InputString extends FormFieldHoc<Props, State> {
-    constructor (props: Props) {
+export class InputString<FS> extends FormFieldHoc<FS, Props<FS>, State> {
+    constructor (props: Props<FS>) {
         super(props);
 
-        this.state = {
-            value: ''
-        };
+        this.state = {};
     }
 
-    protected validator () {
+    protected validate () {
+        const { formContext, name } = this.props;
+        const value = formContext.formState[ name as string ];
         const { error } = this.state;
-        const result = this.state.value && this.state.value.length > 0;
+        const result = value && value.length > 0;
         if (Boolean(error) === !result) {
             if (!result) {
                 this.setState({ ...this.state, error: 'field is required' });
@@ -33,15 +37,18 @@ export class InputString extends FormFieldHoc<Props, State> {
         return result;
     }
 
-    private onChange(e: React.FormEvent<HTMLInputElement>) {
-        this.setState({...this.state, value: e.currentTarget.value});
+    private onChange (e: React.FormEvent<HTMLInputElement>) {
+        const { name, formContext } = this.props;
+        formContext.updateField(name, e.currentTarget.value);
     }
 
     render (): React.ReactNode {
-        const { title } = this.props;
+        const { title, formContext, name } = this.props;
+        const value = formContext.formState[ name as string ];
         return (<label>
             { title }
-            <input onChange={this.onChange.bind(this)}/>
+            <input onChange={ this.onChange.bind(this) } disabled={ formContext.action === FormAction.Read }
+                   value={ value }/>
         </label>);
     }
 }

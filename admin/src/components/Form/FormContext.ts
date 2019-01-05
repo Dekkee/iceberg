@@ -1,11 +1,16 @@
 import * as React from 'react';
-import { Validator } from './validator';
+import { FormAction } from './Form';
 
-export interface FormContext {
+export type Validator = () => boolean;
+
+export interface FormContext<S extends {}> {
     validators: Validator[];
+    action: FormAction;
+    updateField: (key: keyof S, value: any) => void;
+    formState: S
 }
 
-const { Provider, Consumer } = React.createContext<FormContext>({ validators: [] });
+const { Provider, Consumer } = React.createContext<FormContext<any>>(null);
 
 export const FormContextProvider = Provider;
 

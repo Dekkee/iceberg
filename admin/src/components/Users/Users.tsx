@@ -1,10 +1,9 @@
 import * as React from 'react';
-import Button from '@material-ui/core/Button';
 import { Route, RouteComponentProps, Switch, withRouter } from 'react-router';
 import { UserList } from './List';
-import { AddUser } from './Add';
-import { history } from '../../history';
 import { compose } from 'recompose';
+import { getUserForm } from './Form';
+import { FormAction } from '../Form';
 
 @compose(withRouter)
 export class Users extends React.Component<{} & RouteComponentProps> {
@@ -13,11 +12,15 @@ export class Users extends React.Component<{} & RouteComponentProps> {
 
         return (
             <div>
-                <Button onClick={ () => history.push(`${match.url}/create`) }>Add</Button>
-                    <Switch>
-                        <Route path={`${match.url}/create`} component={ AddUser }/>
-                        <Route path={`${match.url}/`} component={ UserList }/>
-                    </Switch>
+                <Switch>
+                    <Route path={ `${ match.url }/create` }
+                           children={ ({ match }) => (getUserForm(FormAction.Add)) }/>
+                    <Route path={ `${ match.url }/edit/:id` }
+                           children={ ({ match }) => (getUserForm(FormAction.Edit, match.params.id)) }/>
+                    <Route path={ `${ match.url }/:id` }
+                           children={ ({ match }) => (getUserForm(FormAction.Read, match.params.id)) }/>
+                    <Route path={ `${ match.url }/` } component={ UserList }/>
+                </Switch>
             </div>
         );
     }

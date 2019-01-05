@@ -1,17 +1,17 @@
 import * as React from 'react';
 import { FormContext, FormContextConsumer } from './FormContext';
 
-interface Props {
-    formContext?: FormContext;
+interface Props<FS> {
+    formContext?: FormContext<FS>;
 }
 
-export abstract class FormFieldHoc<P, S> extends React.Component<P & Props, S> {
-    protected constructor (props: P & Props) {
+export abstract class FormFieldHoc<FS, P, S> extends React.Component<P & Props<FS>, S> {
+    protected constructor (props: P & Props<FS>) {
         super(props);
-        this.props.formContext.validators.push(this.validator);
+        this.props.formContext.validators.push(this.validate);
     }
 
-    protected abstract validator ();
+    protected abstract validate ();
 }
 
 export const withFormContext = <C extends React.ComponentClass> (Component: C): C => {
