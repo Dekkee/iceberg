@@ -1,6 +1,4 @@
-export interface User {
-    email: string;
-}
+import { User } from '../../../common/contracts/User';
 
 export interface UsersResponse {
     result: User[],

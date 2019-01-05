@@ -1,4 +1,4 @@
-import { User } from '../api/contracts';
+import { User } from '../../../common/contracts/User';
 import { switchCase, switchReducer } from '../../../common/utils/reducers/switchReducer';
 import { actions, UsersListActionDone, UsersListActionInit, UsersListActionFail } from '../actions/users';
 

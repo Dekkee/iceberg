@@ -1,14 +1,13 @@
 import { model, Schema, Document } from "mongoose";
 import { pbkdf2Sync, randomBytes } from "crypto";
 
-export interface UserModel {
+import { UserExtended } from '../../../common/contracts/User';
+
+export interface UserModel extends UserExtended {
     [ index: string ]: any;
 
-    displayName?: string;
-    email: string;
     passwordHash?: string;
     salt?: string;
-    isAdmin: boolean;
 }
 
 const userSchema = new Schema({

@@ -3,7 +3,7 @@ import { connect } from '../../../../common/utils/connect';
 import { actions } from '../../actions/users';
 import { Action } from 'redux';
 import { selector } from '../../selectors/users';
-import { User } from '../../api/contracts';
+import { User } from '../../../../common/contracts/User';
 
 interface State {
     users: any[];
