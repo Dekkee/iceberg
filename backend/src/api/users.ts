@@ -21,14 +21,20 @@ export const setup = (router: Router) => {
 
     router.get('/api/admin/user/:id', async (req, res) => {
         try {
-            res.send(await new UserRepository().get(req.params.id));
+            const id = req.params.id;
+            const user = await new UserRepository().get(id);
+            if (!user) {
+                res.status(404).send(new Error(`User with id ${id} not found`));
+                return;
+            }
+            res.send(user);
         }
         catch (err) {
             res.status(500).send(err);
         }
     });
 
-    router.put('/api/admin/user', async (req, res) => {
+    router.post('/api/admin/user', async (req, res) => {
         try {
             res.send(await new UserRepository().put(req.body));
         }
@@ -37,9 +43,18 @@ export const setup = (router: Router) => {
         }
     });
 
-    router.delete('/api/admin/user', async (req, res) => {
+    router.put('/api/admin/user', async (req, res) => {
         try {
-            res.send(await new UserRepository().delete(req.body));
+            res.send(await new UserRepository().update(req.body));
+        }
+        catch (err) {
+            res.status(500).send(err);
+        }
+    });
+
+    router.delete('/api/admin/user/:id', async (req, res) => {
+        try {
+            res.send(await new UserRepository().delete(req.params.id));
         }
         catch (err) {
             res.status(500).send(err);

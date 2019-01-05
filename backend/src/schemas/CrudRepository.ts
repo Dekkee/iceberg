@@ -11,7 +11,7 @@ export default abstract class CrudRepository<T extends Document> implements ICru
 
     async update (item: T) {
         try {
-            await this.model.update({ id: item.id }, item);
+            await this.model.update({ _id: new ObjectID(item.id) }, item);
         } catch (e) {
             console.error(colors.red(e.message));
         }
@@ -19,7 +19,7 @@ export default abstract class CrudRepository<T extends Document> implements ICru
 
     async delete (id: Key) {
         try {
-            await this.model.deleteOne({ '_id': new ObjectID(id) });
+            await this.model.deleteOne({ _id: new ObjectID(id) });
         } catch (e) {
             console.error(colors.red(e.message));
         }
@@ -35,7 +35,7 @@ export default abstract class CrudRepository<T extends Document> implements ICru
 
     async get (id: Key, populate?: string): Promise<T | null> {
         try {
-            let query = this.model.findOne({ id: id });
+            let query = this.model.findOne({ _id: new ObjectID(id) });
             if (populate) {
                 query = query.populate(populate);
             }
