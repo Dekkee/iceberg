@@ -4,8 +4,11 @@ import { actions } from '../../actions/users';
 import { Action } from 'redux';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
+import DeleteIcon from '@material-ui/icons/Delete';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { selector } from '../../selectors/users';
 import { User } from '../../../../common/contracts/User';
@@ -15,15 +18,12 @@ import { compose } from 'recompose';
 import { withStyles } from '@material-ui/core';
 import { WithStyles } from '../../../../common/styles/WithStyles';
 import { ProgressOverlay } from '../ProgessOverlay/ProgressOverlay';
+import { State as StateProps } from '../../reducers/users';
 
 interface DispatchProps {
     loadUsers?: () => Action;
 }
 
-interface StateProps {
-    users: User[];
-    count: number;
-}
 
 type Props = StateProps & DispatchProps;
 
@@ -53,19 +53,40 @@ export class UserList extends React.Component<Props & RouteComponentProps & With
         this.props.loadUsers();
     }
 
+    onUserClicked (user: User) {
+        history.push(`/admin/users/${ user.email }`);
+    }
+
+    onDeleteUserClicked (user: User) {
+        history.push(`/admin/users/${ user.email }`);
+    }
+
     render () {
-        const { users, match, classes } = this.props;
+        const { users, match, classes, isFetching } = this.props;
 
         return (<>
             <Typography className={ classes.header } variant="h5" component="h3">
                 Пользователи
                 <Button onClick={ () => history.push(`${ match.url }/create`) }
-                        variant="contained"><AddIcon/>Добавить</Button>
+                        variant="contained"
+                        size="small">
+                    <AddIcon/>Добавить
+                </Button>
             </Typography>
 
-            <ProgressOverlay inProgress={ false }>
+            <ProgressOverlay inProgress={ isFetching }>
                 <List>
-                    { users && users.map((user, i) => <ListItem key={ i }>{ user.email }</ListItem>) }
+                    { users && users.map((user, i) =>
+                        <ListItem key={ i } button
+                                  onClick={ () => this.onUserClicked(user) }>
+                            { user.email }
+                            <ListItemSecondaryAction>
+                                <IconButton aria-label="Delete"
+                                            onClick={ () => this.onDeleteUserClicked(user) }>
+                                    <DeleteIcon/>
+                                </IconButton>
+                            </ListItemSecondaryAction>
+                        </ListItem>) }
                 </List>
             </ProgressOverlay>
         </>);

@@ -1,6 +1,4 @@
 import { AuthenticationResponse } from './contracts';
-import { select } from 'redux-saga/effects';
-import { tokenSelector } from '../selectors/auth';
 
 const endPoint = '//localhost:3000/api/admin';
 // process.env.API_HOST && process.env.HOST_PORT ?
@@ -11,7 +9,7 @@ export function resolveUrl (url: string): string {
     return `${endPoint}/${url}`;
 }
 
-const checkStatus = (response: Response) => {
+export const checkStatus = (response: Response) => {
     if (response.status >= 200 && response.status < 300) {
         return response;
     } else {
@@ -19,17 +17,6 @@ const checkStatus = (response: Response) => {
         (error as any).response = response;
         throw error;
     }
-};
-
-export const getUsers = function* () {
-    const { token } = yield select(tokenSelector);
-    const response = yield fetch(resolveUrl('user'), {
-        headers: {
-            'Authorization': token
-        }
-    });
-    checkStatus(response);
-    return yield response.json();
 };
 
 export const login = async (email: string, password: string): Promise<AuthenticationResponse> => {
