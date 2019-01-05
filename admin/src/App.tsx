@@ -14,6 +14,7 @@ import Button from '@material-ui/core/Button/Button';
 
 import './App.scss';
 import { AuthState, TokenState } from './reducers/auth';
+import { WithStyles } from '../../common/styles/WithStyles';
 
 interface State {
     email: string;
@@ -22,7 +23,7 @@ interface State {
 
 type StateProps = Partial<AuthState> & TokenState;
 
-type Props = StateProps & DispatchProps & { classes?: any };
+type Props = StateProps & DispatchProps & WithStyles;
 
 interface DispatchProps {
     login?: (email: string, password: string) => Action;
@@ -30,18 +31,9 @@ interface DispatchProps {
     logout?: () => Action;
 }
 
-const mapStateToProps = (state): StateProps => ({ ...authSelector(state), ...tokenSelector(state) });
-
-const mapDispatchToProps: DispatchProps = {
-    login: actions.auth.init,
-    refresh: actions.refresh.init,
-    logout: actions.logout,
-};
-
-@compose(withStyles(theme => ({
+const styles = theme => ({
     container: {
         display: 'flex',
-        flexWrap: 'wrap',
     },
     textField: {
         marginLeft: theme.spacing.unit,
@@ -57,8 +49,17 @@ const mapDispatchToProps: DispatchProps = {
     button: {
         margin: theme.spacing.unit,
     },
-})))
-@compose(withRouter)
+});
+
+const mapStateToProps = (state): StateProps => ({ ...authSelector(state), ...tokenSelector(state) });
+
+const mapDispatchToProps: DispatchProps = {
+    login: actions.auth.init,
+    refresh: actions.refresh.init,
+    logout: actions.logout,
+};
+
+@compose(withStyles(styles), withRouter)
 @connect(mapStateToProps, mapDispatchToProps)
 export class App extends React.Component<Props, State> {
     constructor (props: Props) {

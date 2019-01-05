@@ -5,10 +5,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import { compose } from "recompose";
-
-interface Props {
-    classes?: any;
-}
+import { WithStyles } from '../../../../common/styles/WithStyles';
 
 @compose(withStyles({
     root: {
@@ -18,7 +15,7 @@ interface Props {
         flexGrow: 1,
     },
 }))
-export class Menu extends React.Component<Props> {
+export class Menu extends React.Component<WithStyles> {
     render() {
         const { classes } = this.props;
 

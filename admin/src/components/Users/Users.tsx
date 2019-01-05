@@ -5,8 +5,8 @@ import { compose } from 'recompose';
 import { getUserForm } from './Form';
 import { FormAction } from '../Form';
 import Paper from '@material-ui/core/Paper';
-
 import { withStyles } from '@material-ui/core';
+import { WithStyles } from '../../../../common/styles/WithStyles';
 
 const styles = theme => ({
     root: {
@@ -17,7 +17,7 @@ const styles = theme => ({
 });
 
 @compose(withStyles(styles), withRouter)
-export class Users extends React.Component<{ classes?: any } & RouteComponentProps> {
+export class Users extends React.Component<WithStyles & RouteComponentProps> {
     render () {
         const { match, classes } = this.props;
 

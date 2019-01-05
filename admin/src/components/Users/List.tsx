@@ -13,6 +13,7 @@ import { RouteComponentProps, withRouter } from 'react-router';
 import { history } from '../../history';
 import { compose } from 'recompose';
 import { withStyles } from '@material-ui/core';
+import { WithStyles } from '../../../../common/styles/WithStyles';
 
 interface DispatchProps {
     loadUsers?: () => Action;
@@ -42,7 +43,7 @@ const styles = theme => ({
 
 @compose(withStyles(styles), withRouter)
 @connect(mapStateToProps, mapDispatchToProps)
-export class UserList extends React.Component<Props & RouteComponentProps & { classes?: any }> {
+export class UserList extends React.Component<Props & RouteComponentProps & WithStyles> {
     constructor (props) {
         super(props);
     }

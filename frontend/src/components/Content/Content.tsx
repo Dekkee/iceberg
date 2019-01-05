@@ -6,12 +6,12 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import { compose } from "recompose";
+import { WithStyles } from '../../../../common/styles/WithStyles';
 
 interface Props {
-    classes?: any;
 }
 
-@compose(withStyles({
+const styles = {
     root: {
         display: 'flex',
         padding: 24,
@@ -31,8 +31,10 @@ interface Props {
     pos: {
         marginBottom: 12,
     },
-}))
-export class Content extends React.Component<Props> {
+};
+
+@compose(withStyles(styles))
+export class Content extends React.Component<Props & WithStyles> {
     render () {
         const { classes } = this.props;
 

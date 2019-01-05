@@ -6,9 +6,9 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import { compose } from 'recompose';
 import { Link } from 'react-router-dom';
+import { WithStyles } from '../../../../common/styles/WithStyles';
 
 interface Props {
-    classes?: any;
     onLogout: Function;
 }
 
@@ -22,7 +22,7 @@ const MenuLink = (linkTo: string) => (props) => (<Link to={ linkTo } { ...props 
         flexGrow: 1,
     },
 }))
-export class Menu extends React.Component<Props> {
+export class Menu extends React.Component<Props & WithStyles> {
     onLogout() {
         this.props.onLogout();
     }
