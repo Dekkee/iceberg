@@ -1,9 +1,12 @@
-import { User } from '../../../common/contracts/User';
+import { UserExtended } from '../../../common/contracts/User';
 
 export interface UsersResponse {
-    result: User[],
+    result: UserExtended[],
     count: number,
     receivedAt: number
+}
+
+export interface UserResponse extends UserExtended {
 }
 
 export interface AuthenticationResponse {

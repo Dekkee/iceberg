@@ -4,5 +4,6 @@ export interface User {
 }
 
 export interface UserExtended extends User {
+    id: string;
     isAdmin: boolean;
 }
