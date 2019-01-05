@@ -26,7 +26,7 @@ export class Users extends React.Component<WithStyles & RouteComponentProps> {
                 <Switch>
                     <Route path={ `${ match.url }/create` }
                            children={ ({ match }) => <UserForm action={ FormAction.Add }/> }/>
-                    <Route path={ `${ match.url }/edit/:id` }
+                    <Route path={ `${ match.url }/:id/edit` }
                            children={ ({ match }) => <UserForm action={ FormAction.Edit } id={ match.params.id }/> }/>
                     <Route path={ `${ match.url }/:id` }
                            children={ ({ match }) => <UserForm action={ FormAction.Read } id={ match.params.id }/> }/>

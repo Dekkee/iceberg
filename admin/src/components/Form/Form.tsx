@@ -3,11 +3,12 @@ import { FormContextProvider, FormContext } from './FormContext';
 import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import { history } from '../../history';
 
 export interface Props<FS> {
     action: FormAction;
     initial: FS;
+    onCancel: VoidFunction;
+    onSubmit: (action: FormAction, state: FS) => void;
 }
 
 interface State<FS> extends FormContext<FS> {
@@ -36,12 +37,9 @@ export class Form<FS extends {}> extends React.Component<Props<FS>, State<FS>> {
         };
     }
 
-    private static onCancel () {
-        history.goBack();
-    }
-
     render () {
-        const { children, action } = this.props;
+        const { children, action, onCancel, onSubmit } = this.props;
+        const { formState } = this.state;
         return (
             <FormContextProvider value={ this.state }>
                 <List>
@@ -49,19 +47,21 @@ export class Form<FS extends {}> extends React.Component<Props<FS>, State<FS>> {
                     <ListItem>
                         {
                             action === FormAction.Add &&
-                            <Button variant="contained" color="primary">Добавить</Button>
+                            <Button variant="contained" color="primary"
+                                    onClick={ () => onSubmit(action, formState) }>Добавить</Button>
                         }
                         {
                             action === FormAction.Edit &&
-                            <Button variant="contained" color="primary">Сохранить</Button>
+                            <Button variant="contained" color="primary"
+                                    onClick={ () => onSubmit(action, formState) }>Сохранить</Button>
                         }
                         {
                             action === FormAction.Read &&
-                            <Button variant="contained" color="primary" onClick={ () => Form.onCancel() }>Закрыть</Button>
+                            <Button variant="contained" color="primary" onClick={ () => onCancel() }>Закрыть</Button>
                         }
                         {
                             (action === FormAction.Add || action === FormAction.Edit) &&
-                            <Button color="inherit" onClick={ () => Form.onCancel() }>Отмена</Button>
+                            <Button color="inherit" onClick={ () => onCancel() }>Отмена</Button>
                         }
                     </ListItem>
                 </List>

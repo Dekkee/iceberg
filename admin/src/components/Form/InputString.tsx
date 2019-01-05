@@ -49,7 +49,8 @@ export class InputString<FS> extends FormFieldHoc<FS, Props<FS>, State> {
 
     render (): React.ReactNode {
         const { title, formContext, name, id } = this.props;
-        const value = formContext.formState[ name as string ];
+        const state = formContext.formState;
+        const value = state && state[ name as string ] || '';
         return (<ListItem>
             <FormControl>
                 <InputLabel htmlFor={ id }>{ title }</InputLabel>

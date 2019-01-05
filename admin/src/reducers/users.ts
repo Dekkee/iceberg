@@ -1,9 +1,9 @@
-import { User } from '../../../common/contracts/User';
+import { UserExtended } from '../../../common/contracts/User';
 import { switchCase, switchReducer } from '../../../common/utils/reducers/switchReducer';
 import { actions, UsersListActionDone, UsersListActionInit, UsersListActionFail } from '../actions/users';
 
 export interface State {
-    users: User[];
+    users: UserExtended[];
     count: number;
     isFetching: boolean;
 }
