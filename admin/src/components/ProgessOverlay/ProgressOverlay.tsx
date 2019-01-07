@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { WithStyles } from '../../../../common/styles/WithStyles';
+import { WithStyles } from '../../../../common/utils/styles/WithStyles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { compose } from 'recompose';
 import { withStyles } from '@material-ui/core';

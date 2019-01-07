@@ -14,7 +14,7 @@ import Button from '@material-ui/core/Button/Button';
 
 import './App.scss';
 import { AuthState, TokenState } from './reducers/auth';
-import { WithStyles } from '../../common/styles/WithStyles';
+import { WithStyles } from '../../common/utils/styles/WithStyles';
 
 interface State {
     email: string;

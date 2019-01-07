@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import { compose } from "recompose";
-import { WithStyles } from '../../../../common/styles/WithStyles';
+import { WithStyles } from '../../../../common/utils/styles/WithStyles';
 
 interface Props {
 }
