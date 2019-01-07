@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Form, FormAction } from '../Form';
 import { InputString } from '../Form/InputString';
 import { InputPassword } from '../Form/InputPassword';
+import { InputBoolean } from '../Form/InputBoolean';
 import Typography from '@material-ui/core/Typography';
 import { ProgressOverlay } from '../ProgessOverlay/ProgressOverlay';
 import { State as StateProps } from '../../reducers/user';
@@ -85,6 +86,7 @@ export class UserForm extends React.Component<Props> {
                     <InputString title="E-mail" name="email" id="email-input"/>
                     <InputString title="Имя" name="displayName" id="name-input"/>
                     <InputPassword title="Пароль" name="password" id="password-input"/>
+                    <InputBoolean title="Админ" name="isAdmin" id="is-admin-input"/>
                 </UserFormWrapper>
             </ProgressOverlay>
         </>);
