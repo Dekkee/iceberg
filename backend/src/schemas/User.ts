@@ -37,6 +37,8 @@ const userSchema = new Schema({
             delete ret.__v;
             delete ret.relatedAt;
             delete ret.updatedAt;
+            delete ret.passwordHash;
+            delete ret.salt;
         }
     }
 });
