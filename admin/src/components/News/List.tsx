@@ -69,11 +69,13 @@ export class UserList extends React.Component<Props & RouteComponentProps & With
     }
 
     onArticleClicked (user: NewsExtended) {
-        history.push(`/admin/news/${ user.id }`);
+        const { match } = this.props;
+        history.push(`${ match.url }/${ user.id }`);
     }
 
     onEditArticleClicked (user: NewsExtended) {
-        history.push(`/admin/news/${ user.id }/edit`);
+        const { match } = this.props;
+        history.push(`${ match.url }/${ user.id }/edit`);
     }
 
     onDeleteArticleClicked (user: NewsExtended) {
@@ -127,7 +129,7 @@ export class UserList extends React.Component<Props & RouteComponentProps & With
             </ProgressOverlay>
 
             <Dialog open={ isDeletePrompted }>
-                <DialogContent>Вы точно хотите удалить пользователя?</DialogContent>
+                <DialogContent>Вы точно хотите удалить?</DialogContent>
                 <Divider/>
                 <DialogActions>
                     <Button onClick={ this.onDeclineDelete.bind(this) } color="default">
