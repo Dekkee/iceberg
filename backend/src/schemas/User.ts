@@ -65,4 +65,17 @@ userSchema.methods.checkPassword = function (password: string) {
     return hash === this.passwordHash;
 };
 
+// workaround for virtual password changing
+userSchema.pre('update', function (next) {
+    const newPassword = this.getUpdate().password;
+    if (newPassword) {
+        this.findOne({ "_id": this.getUpdate().id }, function (err, doc) {
+            doc.password = newPassword;
+            doc.save(next);
+        });
+    } else {
+        next();
+    }
+});
+
 export const User = model<UserModel & Document>('User', userSchema);
