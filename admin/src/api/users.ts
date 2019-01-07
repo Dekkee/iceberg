@@ -1,7 +1,7 @@
 import { select } from 'redux-saga/effects';
 import { tokenSelector } from '../selectors/auth';
 import { checkStatus, resolveUrl } from './index';
-import { User } from '../../../common/contracts/User';
+import { UserExtended } from '../../../common/contracts/User';
 
 export const listUsers = function* () {
     const { token } = yield select(tokenSelector);
@@ -25,7 +25,7 @@ export const getUser = function* (id: string) {
     return yield response.json();
 };
 
-export const createUser = function* (user: User) {
+export const createUser = function* (user: UserExtended) {
     const { token } = yield select(tokenSelector);
     const response = yield fetch(resolveUrl('user'), {
         method: 'POST',
@@ -36,10 +36,10 @@ export const createUser = function* (user: User) {
         body: JSON.stringify(user)
     });
     checkStatus(response);
-    return yield response.json();
+    return yield response.text();
 };
 
-export const updateUser = function* (user: User) {
+export const updateUser = function* (user: UserExtended) {
     const { token } = yield select(tokenSelector);
     const response = yield fetch(resolveUrl('user'), {
         method: 'PUT',
@@ -50,7 +50,7 @@ export const updateUser = function* (user: User) {
         body: JSON.stringify(user)
     });
     checkStatus(response);
-    return yield response.json();
+    return yield response.text();
 };
 
 export const deleteUser = function* (id: string) {
@@ -62,5 +62,5 @@ export const deleteUser = function* (id: string) {
         }
     });
     checkStatus(response);
-    return yield response.json();
+    return yield response.text();
 };

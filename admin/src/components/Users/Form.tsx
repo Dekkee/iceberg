@@ -60,11 +60,11 @@ export class Form extends React.Component<Props> {
         switch (action) {
             case FormAction.Edit:
                 updateUser(user);
-                history.push('/admin/news');
+                history.push('/admin/users');
                 break;
             case FormAction.Add:
                 createUser(user);
-                history.push('/admin/news');
+                history.push('/admin/users');
                 break;
         }
     }

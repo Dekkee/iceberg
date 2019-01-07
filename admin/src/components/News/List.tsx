@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { connect } from '../../../../common/utils/connect';
 import { actions } from '../../actions/news';
-import { actions as userAction } from '../../actions/user';
 import { Action } from 'redux';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
@@ -42,7 +41,7 @@ const mapStateToProps = (state): StateProps => selector(state);
 
 const mapDispatchToProps: DispatchProps = {
     loadNews: actions.list.init,
-    deleteNews: userAction.remove.init,
+    deleteNews: actions.remove.init,
 };
 
 const styles = theme => ({

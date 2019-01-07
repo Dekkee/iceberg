@@ -16,7 +16,7 @@ export const listNews = function* () {
 
 export const getNews = function* (id: string) {
     const { token } = yield select(tokenSelector);
-    const response = yield fetch(resolveUrl(`user/${ id }`), {
+    const response = yield fetch(resolveUrl(`news/${ id }`), {
         headers: {
             'Authorization': token
         }
@@ -36,7 +36,7 @@ export const createNews = function* (news: NewsExtended) {
         body: JSON.stringify(news)
     });
     checkStatus(response);
-    return yield response.json();
+    return yield response.text();
 };
 
 export const updateNews = function* (news: NewsExtended) {
@@ -50,17 +50,17 @@ export const updateNews = function* (news: NewsExtended) {
         body: JSON.stringify(news)
     });
     checkStatus(response);
-    return yield response.json();
+    return yield response.text();
 };
 
 export const deleteNews = function* (id: string) {
     const { token } = yield select(tokenSelector);
-    const response = yield fetch(resolveUrl(`user/${ id }`), {
+    const response = yield fetch(resolveUrl(`news/${ id }`), {
         method: 'DELETE',
         headers: {
             'Authorization': token
         }
     });
     checkStatus(response);
-    return yield response.json();
+    return yield response.text();
 };
