@@ -57,11 +57,11 @@ export class Form extends React.Component<Props> {
         const { createNews, updateNews } = this.props;
         switch (action) {
             case FormAction.Edit:
-                createNews(news);
+                updateNews(news);
                 history.push('/admin/news');
                 break;
             case FormAction.Add:
-                updateNews(news);
+                createNews(news);
                 history.push('/admin/news');
                 break;
         }
