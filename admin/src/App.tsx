@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Menu } from './layout/Menu';
 import { Route, Switch, withRouter } from 'react-router';
 import { Users } from './components/Users';
+import { News } from './components/News';
 import { authSelector, tokenSelector } from './selectors/auth';
 import { actions } from './actions/auth';
 import { connect } from '../../common/utils/connect';
@@ -106,6 +107,7 @@ export class App extends React.Component<Props, State> {
                                 <div className="content">
                                     <Switch>
                                         <Route path="/admin/users" component={ Users }/>
+                                        <Route path="/admin/news" component={ News }/>
                                     </Switch>
                                 </div>
                             </div>

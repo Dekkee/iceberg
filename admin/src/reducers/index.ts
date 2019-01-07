@@ -1,16 +1,16 @@
 import { combineReducers } from 'redux';
-import * as users from './users';
 import * as user from './user';
 import * as auth from './auth';
+import * as news from './news';
 
 export const reducer = combineReducers<State>({
-    users: users.reducer,
     user: user.reducer,
+    news: news.reducer,
     token: auth.tokenReducer,
 });
 
 export interface State {
-    users: users.State,
     user: user.State,
+    news: news.State,
     token: auth.TokenState,
 }
