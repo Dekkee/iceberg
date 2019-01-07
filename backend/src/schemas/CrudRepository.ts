@@ -27,7 +27,7 @@ export default abstract class CrudRepository<T extends Document> implements ICru
 
     async put (item: T) {
         try {
-            await this.model.create(item);
+            return await this.model.create(item);
         } catch (e) {
             console.error(colors.red(e.message));
         }
