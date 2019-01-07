@@ -1,16 +1,13 @@
 import { combineReducers } from 'redux';
-import * as user from './user';
 import * as auth from './auth';
-import * as news from './news';
+
+import { modules } from '../modules';
 
 export const reducer = combineReducers<State>({
-    user: user.reducer,
-    news: news.reducer,
     token: auth.tokenReducer,
+    ...modules.reduce((a, m) => ({...a, [m.name]: m.reducer}), {})
 });
 
 export interface State {
-    user: user.State,
-    news: news.State,
     token: auth.TokenState,
 }

@@ -3,10 +3,10 @@ import { Route, RouteComponentProps, Switch, withRouter } from 'react-router';
 import { UserList } from './List';
 import { compose } from 'recompose';
 import { Form } from './Form';
-import { FormAction } from '../Form';
+import { FormAction } from '../../../components/Form';
 import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core';
-import { WithStyles } from '../../../../common/utils/styles/WithStyles';
+import { WithStyles } from '../../../../../common/utils/styles/WithStyles';
 
 const styles = theme => ({
     root: {
@@ -17,7 +17,7 @@ const styles = theme => ({
 });
 
 @compose(withStyles(styles), withRouter)
-export class Users extends React.Component<WithStyles & RouteComponentProps> {
+export class News extends React.Component<WithStyles & RouteComponentProps> {
     render () {
         const { match, classes } = this.props;
 

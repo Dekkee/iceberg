@@ -1,13 +1,12 @@
 import { all, fork } from 'redux-saga/effects';
 
-import { saga as userSaga } from './user';
-import { saga as newsSaga } from './news';
 import { saga as authSaga } from './auth';
+
+import { modules } from '../modules';
 
 export function* root() {
     yield all([
-        fork(userSaga),
-        fork(newsSaga),
+        all(modules.map(m => m.saga())),
         fork(authSaga),
     ])
 }

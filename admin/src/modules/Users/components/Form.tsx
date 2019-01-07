@@ -1,17 +1,17 @@
 import * as React from 'react';
-import { Form as FormHoc, FormAction } from '../Form';
-import { InputString } from '../Form/InputString';
-import { InputPassword } from '../Form/InputPassword';
-import { InputBoolean } from '../Form/InputBoolean';
+import { Form as FormHoc, FormAction } from '../../../components/Form';
+import { InputString } from '../../../components/Form/InputString';
+import { InputPassword } from '../../../components/Form/InputPassword';
+import { InputBoolean } from '../../../components/Form/InputBoolean';
 import Typography from '@material-ui/core/Typography';
-import { ProgressOverlay } from '../ProgessOverlay/ProgressOverlay';
-import { State as StateProps } from '../../reducers/user';
-import { selector } from '../../selectors/user';
-import { actions } from '../../actions/user';
+import { ProgressOverlay } from '../../../components/ProgessOverlay';
+import { State as StateProps } from '../reducers';
+import { selector } from '../selectors';
+import { actions } from '../actions';
 import { Action } from 'redux';
-import { connect } from '../../../../common/utils/connect';
-import { UserExtended } from '../../../../common/contracts/User';
-import { history } from '../../history';
+import { connect } from '../../../../../common/utils/connect';
+import { UserExtended } from '../../../../../common/contracts/User';
+import { history } from '../../../history';
 
 interface DispatchProps {
     getUser?: (id: string) => Action;
@@ -70,16 +70,16 @@ export class Form extends React.Component<Props> {
     }
 
     render () {
-        const { action, isFetching, user } = this.props;
+        const { action, isFetching, entity } = this.props;
 
         return (<>
             <Typography variant="h5" component="h3">
                 { action === FormAction.Add && 'Добавление пользователя' }
                 { action === FormAction.Edit && 'Редактирование пользователя' }
-                { action === FormAction.Read && `Пользователь ${ user && user.email }` }
+                { action === FormAction.Read && `Пользователь ${ entity && entity.email }` }
             </Typography>
             <ProgressOverlay inProgress={ isFetching }>
-                <UserFormWrapper initial={ user }
+                <UserFormWrapper initial={ entity }
                                  action={ action }
                                  onCancel={ () => this.onCancel() }
                                  onSubmit={ this.onSubmit.bind(this) }>

@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { connect } from '../../../../common/utils/connect';
-import { actions } from '../../actions/news';
+import { connect } from '../../../../../common/utils/connect';
+import { actions } from '../actions';
 import { Action } from 'redux';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
@@ -15,15 +15,15 @@ import Dialog from '@material-ui/core/Dialog';
 import Divider from '@material-ui/core/Divider';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
-import { selector } from '../../selectors/news';
+import { selector } from '../selectors';
 import { RouteComponentProps, withRouter } from 'react-router';
-import { history } from '../../history';
+import { history } from '../../../history';
 import { compose } from 'recompose';
 import { withStyles } from '@material-ui/core';
-import { WithStyles } from '../../../../common/utils/styles/WithStyles';
-import { ProgressOverlay } from '../ProgessOverlay/ProgressOverlay';
-import { State as StateProps } from '../../reducers/news';
-import { NewsExtended } from '../../../../common/contracts/News';
+import { WithStyles } from '../../../../../common/utils/styles/WithStyles';
+import { ProgressOverlay } from '../../../components/ProgessOverlay';
+import { State as StateProps } from '../reducers';
+import { NewsExtended } from '../../../../../common/contracts/News';
 
 interface DispatchProps {
     loadNews?: () => Action;
@@ -95,7 +95,7 @@ export class UserList extends React.Component<Props & RouteComponentProps & With
     }
 
     render () {
-        const { news, match, classes, isFetching } = this.props;
+        const { list, match, classes, isFetching } = this.props;
         const { isDeletePrompted } = this.state;
 
         return (<>
@@ -110,7 +110,7 @@ export class UserList extends React.Component<Props & RouteComponentProps & With
 
             <ProgressOverlay inProgress={ isFetching }>
                 <List>
-                    { news && news.map((article, i) =>
+                    { list && list.map((article, i) =>
                         <ListItem key={ i } button
                                   onClick={ () => this.onArticleClicked(article) }>
                             { article.title }

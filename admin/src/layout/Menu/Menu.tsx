@@ -7,6 +7,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { compose } from 'recompose';
 import { Link } from 'react-router-dom';
 import { WithStyles } from '../../../../common/utils/styles/WithStyles';
+import { modules } from '../../modules';
 
 interface Props {
     onLogout: Function;
@@ -34,10 +35,10 @@ export class Menu extends React.Component<Props & WithStyles> {
             <div className={ classes.root }>
                 <AppBar position="sticky">
                     <Toolbar>
-                        <Button color="inherit" aria-label="Users"
-                                component={ MenuLink('/admin/users') }> Users </Button>
-                        <Button color="inherit" aria-label="News"
-                                component={ MenuLink('/admin/news') }> News </Button>
+                        {
+                            modules.map((m, i) => <Button color="inherit" aria-label={m.label} key={i}
+                                                          component={ MenuLink(`/admin/${m.name}`) }>{m.label}</Button>)
+                        }
                         <Typography variant="h6" color="inherit" className={ classes.grow }/>
                         <Button color="inherit" aria-label="Users"
                                 onClick={this.onLogout.bind(this)}> Logout </Button>

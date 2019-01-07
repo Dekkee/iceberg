@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { connect } from '../../../../common/utils/connect';
-import { actions } from '../../actions/user';
+import { connect } from '../../../../../common/utils/connect';
+import { actions } from '../actions';
 import { Action } from 'redux';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
@@ -15,15 +15,15 @@ import Dialog from '@material-ui/core/Dialog';
 import Divider from '@material-ui/core/Divider';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
-import { selector } from '../../selectors/user';
-import { UserExtended } from '../../../../common/contracts/User';
+import { selector } from '../selectors';
+import { UserExtended } from '../../../../../common/contracts/User';
 import { RouteComponentProps, withRouter } from 'react-router';
-import { history } from '../../history';
+import { history } from '../../../history';
 import { compose } from 'recompose';
 import { withStyles } from '@material-ui/core';
-import { WithStyles } from '../../../../common/utils/styles/WithStyles';
-import { ProgressOverlay } from '../ProgessOverlay/ProgressOverlay';
-import { State as StateProps } from '../../reducers/user';
+import { WithStyles } from '../../../../../common/utils/styles/WithStyles';
+import { ProgressOverlay } from '../../../components/ProgessOverlay';
+import { State as StateProps } from '../reducers';
 
 interface DispatchProps {
     loadUsers?: () => Action;
@@ -95,9 +95,8 @@ export class UserList extends React.Component<Props & RouteComponentProps & With
     }
 
     render () {
-        const { users, match, classes, isFetching } = this.props;
+        const { list, match, classes, isFetching } = this.props;
         const { isDeletePrompted } = this.state;
-
         return (<>
             <Typography className={ classes.header } variant="h5" component="h3">
                 Пользователи
@@ -110,7 +109,7 @@ export class UserList extends React.Component<Props & RouteComponentProps & With
 
             <ProgressOverlay inProgress={ isFetching }>
                 <List>
-                    { users && users.map((user, i) =>
+                    { list && list.map((user, i) =>
                         <ListItem key={ i } button
                                   onClick={ () => this.onUserClicked(user) }>
                             { user.email }

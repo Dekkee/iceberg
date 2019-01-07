@@ -1,15 +1,16 @@
 import * as React from 'react';
-import { Form as FormHoc, FormAction } from '../Form';
-import { InputString } from '../Form/InputString';
+import { Form as FormHoc, FormAction } from '../../../components/Form';
+import { InputString } from '../../../components/Form/InputString';
 import Typography from '@material-ui/core/Typography';
-import { ProgressOverlay } from '../ProgessOverlay/ProgressOverlay';
-import { State as StateProps } from '../../reducers/news';
-import { selector } from '../../selectors/news';
-import { actions } from '../../actions/news';
+import { ProgressOverlay } from '../../../components/ProgessOverlay';
+import { State as StateProps } from '../reducers';
+import { selector } from '../selectors';
+import { actions } from '../actions';
 import { Action } from 'redux';
-import { connect } from '../../../../common/utils/connect';
-import { NewsExtended } from '../../../../common/contracts/News';
-import { history } from '../../history';
+import { connect } from '../../../../../common/utils/connect';
+import { NewsExtended } from '../../../../../common/contracts/News';
+import { history } from '../../../history';
+import { moduleName } from '..';
 
 interface DispatchProps {
     getUser?: (id: string) => Action;
@@ -58,11 +59,11 @@ export class Form extends React.Component<Props> {
         switch (action) {
             case FormAction.Edit:
                 updateNews(news);
-                history.push('/admin/news');
+                history.push(`/admin/${moduleName}`);
                 break;
             case FormAction.Add:
                 createNews(news);
-                history.push('/admin/news');
+                history.push(`/admin/${moduleName}`);
                 break;
         }
     }
