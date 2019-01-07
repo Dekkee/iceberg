@@ -5,7 +5,7 @@ export const ACCESS_ADMIN_PAGES = 'access admin pages';
 export const adminUser = new Roles({
     async failureHandler (req, res, action) {
         // optional function to customise code that runs when
-        // user fails authorisation
+        // user fails authorization
         res.status(403);
         switch (req.accepts('json', 'html')) {
             case 'json':
