@@ -1,8 +1,20 @@
 import { actions, UserCreateActionInit, UserDeleteActionInit, UserUpdateActionInit } from '../actions/user';
 import { put, takeLatest, call } from 'redux-saga/effects';
-import { UserResponse } from '../api/contracts';
-import { deleteUser, getUser, createUser, updateUser } from '../api/users';
+import { UserResponse, UserListResponse } from '../api/contracts';
+import { deleteUser, getUser, createUser, updateUser, listUsers } from '../api/users';
 import { UserGetActionInit } from '../actions/user';
+import { Action } from 'redux';
+
+const handleFetch = function* (action: Action) {
+    try {
+        const response: UserListResponse = yield call(listUsers);
+
+        yield put(actions.list.done(response));
+
+    } catch (e) {
+        yield put(actions.list.fail(e));
+    }
+};
 
 const handleCreate = function* (action: UserCreateActionInit) {
     try {
@@ -51,4 +63,5 @@ export function* saga() {
     yield takeLatest(actions.get.init.type, handleGet);
     yield takeLatest(actions.update.init.type, handleUpdate);
     yield takeLatest(actions.remove.init.type, handleDelete);
+    yield takeLatest(actions.list.init.type, handleFetch);
 }

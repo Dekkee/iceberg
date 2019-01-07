@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Form, FormAction } from '../Form';
+import { Form as FormHoc, FormAction } from '../Form';
 import { InputString } from '../Form/InputString';
 import { InputPassword } from '../Form/InputPassword';
 import { InputBoolean } from '../Form/InputBoolean';
@@ -35,11 +35,11 @@ const mapDispatchToProps: DispatchProps = {
 };
 
 // todo: remove? Its just for typing
-class UserFormWrapper extends Form<UserExtended> {
+class UserFormWrapper extends FormHoc<UserExtended> {
 }
 
 @connect(mapStateToProps, mapDispatchToProps)
-export class UserForm extends React.Component<Props> {
+export class Form extends React.Component<Props> {
     constructor (props: Props) {
         super(props);
     }
@@ -60,11 +60,11 @@ export class UserForm extends React.Component<Props> {
         switch (action) {
             case FormAction.Edit:
                 updateUser(user);
-                history.push('/admin/users');
+                history.push('/admin/news');
                 break;
             case FormAction.Add:
                 createUser(user);
-                history.push('/admin/users');
+                history.push('/admin/news');
                 break;
         }
     }

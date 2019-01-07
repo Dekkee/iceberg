@@ -2,11 +2,11 @@ import * as React from 'react';
 import { Route, RouteComponentProps, Switch, withRouter } from 'react-router';
 import { UserList } from './List';
 import { compose } from 'recompose';
-import { UserForm } from './UserForm';
+import { Form } from './Form';
 import { FormAction } from '../Form';
 import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core';
-import { WithStyles } from '../../../../common/styles/WithStyles';
+import { WithStyles } from '../../../../common/utils/styles/WithStyles';
 
 const styles = theme => ({
     root: {
@@ -25,11 +25,11 @@ export class Users extends React.Component<WithStyles & RouteComponentProps> {
             <Paper className={ classes.root } elevation={ 1 }>
                 <Switch>
                     <Route path={ `${ match.url }/create` }
-                           children={ ({ match }) => <UserForm action={ FormAction.Add }/> }/>
+                           children={ ({ match }) => <Form action={ FormAction.Add }/> }/>
                     <Route path={ `${ match.url }/:id/edit` }
-                           children={ ({ match }) => <UserForm action={ FormAction.Edit } id={ match.params.id }/> }/>
+                           children={ ({ match }) => <Form action={ FormAction.Edit } id={ match.params.id }/> }/>
                     <Route path={ `${ match.url }/:id` }
-                           children={ ({ match }) => <UserForm action={ FormAction.Read } id={ match.params.id }/> }/>
+                           children={ ({ match }) => <Form action={ FormAction.Read } id={ match.params.id }/> }/>
                     <Route path={ `${ match.url }/` } component={ UserList }/>
                 </Switch>
             </Paper>

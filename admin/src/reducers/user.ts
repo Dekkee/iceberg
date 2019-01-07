@@ -10,7 +10,7 @@ import {
     UserDeleteActionInit,
     UserGetActionDone,
     UserGetActionFail,
-    UserGetActionInit,
+    UserGetActionInit, UserListActionDone, UserListActionFail, UserListActionInit,
     UserUpdateActionDone,
     UserUpdateActionFail,
     UserUpdateActionInit
@@ -18,12 +18,16 @@ import {
 
 export interface State {
     user?: UserExtended;
+    users: UserExtended[];
+    count: number;
     isFetching: boolean;
     error?: Error;
 }
 
 const initialState: State = {
     user: null,
+    users: [],
+    count: 0,
     isFetching: false,
 };
 
@@ -93,6 +97,22 @@ export const reducer = switchReducer<State>({
         ...state,
         user: null,
         error: action.error,
+        isFetching: false,
+    })),
+    ...switchCase(actions.list.init)((state:State, action: UserListActionInit): State => ({
+        ...state,
+        isFetching: true,
+    })),
+    ...switchCase(actions.list.done)((state:State, action: UserListActionDone): State => ({
+        ...state,
+        users: action.response.result,
+        count: action.response.count,
+        isFetching: false,
+    })),
+    ...switchCase(actions.list.fail)((state:State, action: UserListActionFail): State => ({
+        ...state,
+        users: initialState.users,
+        count: initialState.count,
         isFetching: false,
     })),
 }, initialState);

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { connect } from '../../../../common/utils/connect';
-import { actions } from '../../actions/users';
-import { actions as userAction } from '../../actions/user';
+import { actions } from '../../actions/user';
 import { Action } from 'redux';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
@@ -16,15 +15,15 @@ import Dialog from '@material-ui/core/Dialog';
 import Divider from '@material-ui/core/Divider';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
-import { selector } from '../../selectors/users';
+import { selector } from '../../selectors/user';
 import { UserExtended } from '../../../../common/contracts/User';
 import { RouteComponentProps, withRouter } from 'react-router';
 import { history } from '../../history';
 import { compose } from 'recompose';
 import { withStyles } from '@material-ui/core';
-import { WithStyles } from '../../../../common/styles/WithStyles';
+import { WithStyles } from '../../../../common/utils/styles/WithStyles';
 import { ProgressOverlay } from '../ProgessOverlay/ProgressOverlay';
-import { State as StateProps } from '../../reducers/users';
+import { State as StateProps } from '../../reducers/user';
 
 interface DispatchProps {
     loadUsers?: () => Action;
@@ -41,8 +40,8 @@ type Props = StateProps & DispatchProps;
 const mapStateToProps = (state): StateProps => selector(state);
 
 const mapDispatchToProps: DispatchProps = {
-    loadUsers: actions.fetch.init,
-    deleteUser: userAction.remove.init,
+    loadUsers: actions.list.init,
+    deleteUser: actions.remove.init,
 };
 
 const styles = theme => ({

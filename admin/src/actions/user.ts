@@ -1,7 +1,19 @@
 import { Action } from 'redux';
-import { UserResponse } from '../api/contracts';
+import { UserResponse, UserListResponse } from '../api/contracts';
 import { action, initActionCreators } from '../../../common/utils/actions/actionCreatorFactory';
 import { User } from '../../../common/contracts/User';
+
+export interface UserListActionInit extends Action {
+
+}
+
+export interface UserListActionDone extends Action {
+    response: UserListResponse;
+}
+
+export interface UserListActionFail extends Action {
+    error: Error;
+}
 
 export interface UserCreateActionInit extends Action {
     user: User;
@@ -51,6 +63,11 @@ export interface UserDeleteActionFail extends Action {
 }
 
 export const actions = {
+    list: {
+        init: action(() => ({ })),
+        done: action((response: UserListResponse) => ({ response })),
+        fail: action((error: Error) => ({ error })),
+    },
     create: {
         init: action((user: User) => ({ user })),
         done: action(() => ({ })),
