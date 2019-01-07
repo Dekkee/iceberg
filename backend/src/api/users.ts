@@ -36,7 +36,8 @@ export const setup = (router: Router) => {
 
     router.post('/api/admin/user', async (req, res) => {
         try {
-            res.send(await new UserRepository().put(req.body));
+            await new UserRepository().put(req.body);
+            res.end();
         }
         catch (err) {
             res.status(500).send(err);
@@ -45,7 +46,8 @@ export const setup = (router: Router) => {
 
     router.put('/api/admin/user', async (req, res) => {
         try {
-            res.send(await new UserRepository().update(req.body));
+            await new UserRepository().update(req.body);
+            res.end();
         }
         catch (err) {
             res.status(500).send(err);
@@ -54,7 +56,8 @@ export const setup = (router: Router) => {
 
     router.delete('/api/admin/user/:id', async (req, res) => {
         try {
-            res.send(await new UserRepository().delete(req.params.id));
+            await new UserRepository().delete(req.params.id);
+            res.end();
         }
         catch (err) {
             res.status(500).send(err);

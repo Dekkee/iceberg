@@ -36,7 +36,8 @@ export const setup = (router: Router) => {
 
     router.post('/api/admin/news', async (req, res) => {
         try {
-            res.send(await new NewsRepository().put(req.body));
+            await new NewsRepository().put(req.body);
+            res.end();
         }
         catch (err) {
             res.status(500).send(err);
@@ -45,7 +46,8 @@ export const setup = (router: Router) => {
 
     router.put('/api/admin/news', async (req, res) => {
         try {
-            res.send(await new NewsRepository().update(req.body));
+            await new NewsRepository().update(req.body);
+            res.end();
         }
         catch (err) {
             res.status(500).send(err);
@@ -54,7 +56,8 @@ export const setup = (router: Router) => {
 
     router.delete('/api/admin/news/:id', async (req, res) => {
         try {
-            res.send(await new NewsRepository().delete(req.params.id));
+            await new NewsRepository().delete(req.params.id);
+            res.end();
         }
         catch (err) {
             res.status(500).send(err);
