@@ -82,7 +82,7 @@ export class UserForm extends React.Component<Props> {
                                  onCancel={ () => this.onCancel() }
                                  onSubmit={ this.onSubmit.bind(this) }>
                     <InputString title="E-mail" name="email" id="email-input"/>
-                    <InputString title="Имя" name="name" id="name-input"/>
+                    <InputString title="Имя" name="displayName" id="name-input"/>
                 </UserFormWrapper>
             </ProgressOverlay>
         </>);
