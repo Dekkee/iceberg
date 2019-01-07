@@ -13,7 +13,7 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import Divider from '@material-ui/core/Divider';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 import { selector } from '../../selectors/users';
@@ -128,10 +128,10 @@ export class UserList extends React.Component<Props & RouteComponentProps & With
             </ProgressOverlay>
 
             <Dialog open={ isDeletePrompted }>
-                <DialogTitle>Удалить?</DialogTitle>
                 <DialogContent>Вы точно хотите удалить пользователя?</DialogContent>
+                <Divider/>
                 <DialogActions>
-                    <Button onClick={ this.onDeclineDelete.bind(this) } color="secondary">
+                    <Button onClick={ this.onDeclineDelete.bind(this) } color="default">
                         Отмена
                     </Button>
                     <Button onClick={ this.onConfirmDelete.bind(this) } color="primary">
