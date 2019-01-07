@@ -8,6 +8,7 @@ export interface NewsModel extends NewsContract {
 
 const newsSchema = new Schema({
     title: String,
+    spoiler: String,
     content: String,
     author: { type: Schema.Types.ObjectId, ref: 'News' }
 }, {
