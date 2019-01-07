@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { FormFieldHoc, withFormContext } from './FormField';
-import { FormContext } from './FormContext';
-import { FormAction } from './Form';
+import { FormFieldHoc, withFormContext } from '../FormField';
+import { FormContext } from '../FormContext';
+import { FormAction } from '../Form';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
