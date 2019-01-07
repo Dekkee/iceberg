@@ -1,5 +1,6 @@
 import { setup as setupUsers } from './users';
 import { setup as setupAuth } from './auth';
+import { setup as setupNews } from './news';
 import { Router } from 'express';
 
 export const setup = (router: Router) => {
@@ -10,4 +11,5 @@ export const setup = (router: Router) => {
     });
     setupUsers(router);
     setupAuth(router);
+    setupNews(router);
 };
