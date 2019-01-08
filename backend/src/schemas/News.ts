@@ -1,4 +1,4 @@
-import { model, Schema, Document } from "mongoose";
+import { model, Schema, Document } from 'mongoose';
 
 import { News as NewsContract } from '../../../common/contracts/News';
 
@@ -10,7 +10,7 @@ const newsSchema = new Schema({
     title: String,
     spoiler: String,
     content: String,
-    author: { type: Schema.Types.ObjectId, ref: 'News' }
+    author: { type: Schema.Types.ObjectId, ref: 'User' }
 }, {
     timestamps: true,
     toObject: {
@@ -27,6 +27,11 @@ const newsSchema = new Schema({
             delete ret.updatedAt;
         }
     }
+});
+
+newsSchema.pre('findOne', function (next) {
+    this.populate('author');
+    next();
 });
 
 export const News = model<NewsModel & Document>('News', newsSchema);

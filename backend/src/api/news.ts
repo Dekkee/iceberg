@@ -2,6 +2,8 @@ import NewsRepository from "../schemas/NewsRepository";
 import { ACCESS_ADMIN_PAGES, adminUser } from "../roles/admin";
 import { Router } from "express";
 import * as passport from 'passport';
+import { User } from '../../../common/contracts/User';
+import { NewsExtended } from '../../../common/contracts/News';
 
 export const setup = (router: Router) => {
     router.use('/api/admin/news', passport.authenticate('jwt'), adminUser.can(ACCESS_ADMIN_PAGES));
@@ -36,7 +38,9 @@ export const setup = (router: Router) => {
 
     router.post('/api/admin/news', async (req, res) => {
         try {
-            await new NewsRepository().create(req.body);
+            const news = req.body;
+            news.author = req.user;
+            await new NewsRepository().create(news);
             res.end();
         }
         catch (err) {

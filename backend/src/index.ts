@@ -7,8 +7,7 @@ import * as cors from 'cors';
 import * as serve from 'serve-static';
 import { setup as setupApi } from './api';
 import { setup as setupPassport } from './auth';
-import { User, UserModel } from './schemas/User';
-import UserRepository from './schemas/UserRepository';
+import { User } from './schemas/User';
 import { adminUser } from './roles/admin';
 
 const app = express();
