@@ -25,7 +25,7 @@ export default abstract class CrudRepository<T extends Document> implements ICru
         }
     }
 
-    async put (item: T) {
+    async create (item: T) {
         try {
             return await this.model.create(item);
         } catch (e) {
@@ -96,7 +96,7 @@ export interface ICrudRepository<T, K extends Key> {
 
     get(id: K): Promise<T | null>;
 
-    put(item: T): void;
+    create(item: T): void;
 
     delete(id: K): void;
 

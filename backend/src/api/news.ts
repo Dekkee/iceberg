@@ -36,7 +36,7 @@ export const setup = (router: Router) => {
 
     router.post('/api/admin/news', async (req, res) => {
         try {
-            await new NewsRepository().put(req.body);
+            await new NewsRepository().create(req.body);
             res.end();
         }
         catch (err) {

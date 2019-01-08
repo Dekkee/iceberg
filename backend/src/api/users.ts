@@ -36,7 +36,7 @@ export const setup = (router: Router) => {
 
     router.post('/api/admin/user', async (req, res) => {
         try {
-            await new UserRepository().put(req.body);
+            await new UserRepository().create(req.body);
             res.end();
         }
         catch (err) {
