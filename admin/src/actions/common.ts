@@ -81,7 +81,7 @@ export const generateActions = <T>(name: string): CrudActions => {
             fail: action((error: Error) => ({ error })),
         },
         create: {
-            init: action((user: T) => ({ user })),
+            init: action((entity: T) => ({ entity })),
             done: action(() => ({ })),
             fail: action((error: Error) => ({ error })),
         },
@@ -91,7 +91,7 @@ export const generateActions = <T>(name: string): CrudActions => {
             fail: action((error: Error) => ({ error })),
         },
         update: {
-            init: action((user: T) => ({ user })),
+            init: action((entity: T) => ({ entity })),
             done: action(() => ({ })),
             fail: action((error: Error) => ({ error })),
         },
