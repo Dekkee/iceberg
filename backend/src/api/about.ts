@@ -16,7 +16,7 @@ export const setup = (router: Router) => {
         }
     });
 
-    router.post('/api/admin/champ', async (req, res) => {
+    router.post('/api/admin/about', async (req, res) => {
         try {
             await About.findOneAndUpdate({}, req.body, { upsert: true });
             res.end();

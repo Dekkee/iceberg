@@ -13,7 +13,7 @@ export const setup = (router: Router) => {
         });
     });
     setupAuth(router);
-    
+
     setupUsers(router);
     setupNews(router);
     setupChamps(router);
