@@ -37,8 +37,19 @@ export class Form<FS extends {}> extends React.Component<Props<FS>, State<FS>> {
         };
     }
 
+    private onFormSubmit(action: FormAction, state: FS) {
+        const { validators } = this.state;
+        for (const validator of validators) {
+            if (!validator()) {
+                return;
+            }
+        }
+        const { onSubmit } = this.props;
+        onSubmit(action, state);
+    }
+
     render () {
-        const { children, action, onCancel, onSubmit } = this.props;
+        const { children, action, onCancel } = this.props;
         const { formState } = this.state;
         return (
             <FormContextProvider value={ this.state }>
@@ -48,12 +59,12 @@ export class Form<FS extends {}> extends React.Component<Props<FS>, State<FS>> {
                         {
                             action === FormAction.Add &&
                             <Button variant="contained" color="primary"
-                                    onClick={ () => onSubmit(action, formState) }>Добавить</Button>
+                                    onClick={ () => this.onFormSubmit(action, formState) }>Добавить</Button>
                         }
                         {
                             action === FormAction.Edit &&
                             <Button variant="contained" color="primary"
-                                    onClick={ () => onSubmit(action, formState) }>Сохранить</Button>
+                                    onClick={ () => this.onFormSubmit(action, formState) }>Сохранить</Button>
                         }
                         {
                             action === FormAction.Read &&

@@ -49,7 +49,7 @@ export class InputUser<FS> extends FormFieldHoc<FS, Props<FS>, State> {
         const { formContext, name } = this.props;
         const value = formContext.formState[name as string];
         const { error } = this.state;
-        const result = value && value.length > 0;
+        const result = !!value;
         if (Boolean(error) === !result) {
             if (!result) {
                 this.setState({ ...this.state, error: 'field is required' });
@@ -72,11 +72,11 @@ export class InputUser<FS> extends FormFieldHoc<FS, Props<FS>, State> {
     render (): React.ReactNode {
         const { title, formContext, name, id, users } = this.props;
         const map = users.list
-            ? users.list.map((user) => ({ label: user.displayName || user.email, value: user.id }))
+            ? users.list.map((user) => ({ label: user.displayName || user.email, value: user }))
             : [];
         const state = formContext.formState;
         const user: UserExtended = state && state[name as string] || null;
-        const value: Option<string> = user && { label: user.displayName || user.email, value: user.id } || undefined;
+        const value: Option<UserExtended> = user && { label: user.displayName || user.email, value: user } || undefined;
         return (<ListItem>
             <FormControl>
                 <Select options={map}

@@ -8,7 +8,7 @@ interface Props<FS> {
 export abstract class FormFieldHoc<FS, P, S> extends React.Component<P & Props<FS>, S> {
     protected constructor (props: P & Props<FS>) {
         super(props);
-        this.props.formContext.validators.push(this.validate);
+        this.props.formContext.validators.push(this.validate.bind(this));
     }
 
     protected abstract validate ();

@@ -2,6 +2,7 @@ import * as React from 'react';
 import { FormAction } from './Form';
 
 export type Validator = () => boolean;
+export type Transformer = () => void;
 
 export interface FormContext<S extends {}> {
     validators: Validator[];
