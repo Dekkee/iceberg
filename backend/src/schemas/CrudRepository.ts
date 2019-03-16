@@ -11,7 +11,7 @@ export default abstract class CrudRepository<T extends Document> implements ICru
 
     async update (item: T) {
         try {
-            await this.model.update({ _id: new ObjectID(item.id) }, item);
+            await this.model.updateOne({ _id: new ObjectID(item.id) }, item);
         } catch (e) {
             console.error(colors.red(e.message));
         }
