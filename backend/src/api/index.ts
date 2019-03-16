@@ -4,6 +4,7 @@ import { setup as setupNews } from './news';
 import { setup as setupChamps } from './champs';
 import { setup as setupStat } from './stat';
 import { setup as setupAbout } from './about';
+import { setup as setupContacts } from './contacts';
 import { Router } from 'express';
 
 export const setup = (router: Router) => {
@@ -20,4 +21,5 @@ export const setup = (router: Router) => {
     setupStat(router);
 
     setupAbout(router);
+    setupContacts(router);
 };
