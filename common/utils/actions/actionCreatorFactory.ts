@@ -32,9 +32,9 @@ export const isActionCreator = (x: any): x is ActionCreator => (
 export const initActionCreators = (prefix: string, dict: Record<string, any>) => {
     Object.keys(dict).forEach((key: string) => {
         if (isActionCreator(dict[key])) {
-            dict[key].type = `${prefix}${key}`;
+            dict[key].type = `${prefix}_${key}`;
         } else if (dict[key] && typeof dict[key] === 'object') {
-            initActionCreators(`${prefix}${key}.`, dict[key]);
+            initActionCreators(`${prefix}_${key}`, dict[key]);
         }
     });
 };
