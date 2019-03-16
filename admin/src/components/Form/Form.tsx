@@ -27,7 +27,7 @@ export class Form<FS extends {}> extends React.Component<Props<FS>, State<FS>> {
         this.state = {
             validators: [],
             action: props.action,
-            formState: props.initial,
+            formState: props.initial || {} as FS,
             updateField: (key, value) => {
                 this.setState({
                     ...this.state,
