@@ -12,9 +12,8 @@ import { AboutExtended } from '../../../../../common/contracts/About';
 import { history } from '../../../history';
 
 interface DispatchProps {
-    getChamp?: (id: string) => Action;
-    createChamp?: (user: AboutExtended) => Action;
-    updateChamp?: (user: AboutExtended) => Action;
+    getAbout?: (id: string) => Action;
+    updateAbout?: (user: AboutExtended) => Action;
 }
 
 type Props = OwnProps & DispatchProps & Partial<StateProps>;
@@ -27,8 +26,8 @@ export interface OwnProps {
 const mapStateToProps = (state): Partial<StateProps> => selector(state);
 
 const mapDispatchToProps: DispatchProps = {
-    getChamp: actions.get.init,
-    updateChamp: actions.update.init,
+    getAbout: actions.get.init,
+    updateAbout: actions.update.init,
 };
 
 // todo: remove? Its just for typing
@@ -42,10 +41,8 @@ export class Form extends React.Component<Props> {
     }
 
     componentDidMount (): void {
-        const { action, getChamp, id } = this.props;
-        if (action === FormAction.Edit || action === FormAction.Read) {
-            getChamp(id);
-        }
+        const { getAbout, id } = this.props;
+        getAbout(id);
     }
 
     onCancel () {
@@ -53,15 +50,8 @@ export class Form extends React.Component<Props> {
     }
 
     onSubmit (action: FormAction, user: AboutExtended) {
-        const { createChamp, updateChamp } = this.props;
-        switch (action) {
-            case FormAction.Edit:
-                updateChamp(user);
-                break;
-            case FormAction.Add:
-                createChamp(user);
-                break;
-        }
+        const { updateAbout } = this.props;
+        updateAbout(user);
     }
 
     render () {
@@ -71,11 +61,11 @@ export class Form extends React.Component<Props> {
             <Typography variant="h5" component="h3">
                 About
             </Typography>
-            <ProgressOverlay inProgress={ isFetching }>
-                <UserFormWrapper initial={ entity }
-                                 action={ action }
-                                 onCancel={ () => this.onCancel() }
-                                 onSubmit={ this.onSubmit.bind(this) }>
+            <ProgressOverlay inProgress={isFetching}>
+                <UserFormWrapper initial={entity}
+                                 action={action}
+                                 onCancel={() => this.onCancel()}
+                                 onSubmit={this.onSubmit.bind(this)}>
                     <InputString title="Описание" name="content" id="content-input"/>
                 </UserFormWrapper>
             </ProgressOverlay>
