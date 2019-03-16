@@ -11,6 +11,7 @@ import { connect } from '../../../../../common/utils/connect';
 import { NewsExtended } from '../../../../../common/contracts/News';
 import { history } from '../../../history';
 import { moduleName } from '..';
+import { InputUser } from '../../../components/Form/InputUser';
 
 interface DispatchProps {
     getUser?: (id: string) => Action;
@@ -85,6 +86,7 @@ export class Form extends React.Component<Props> {
                     <InputString title="Заголовок" name="title" id="title-input"/>
                     <InputString title="Короткое содержание" name="spoiler" id="spoiler-input"/>
                     <InputString title="Содержание" name="content" id="content-input"/>
+                    <InputUser title="Автор" name="author" id="author-input"/>
                 </NewsFormWrapper>
             </ProgressOverlay>
         </>);
