@@ -10,7 +10,6 @@ import { Action } from 'redux';
 import { connect } from '../../../../../common/utils/connect';
 import { NewsExtended } from '../../../../../common/contracts/News';
 import { history } from '../../../history';
-import { moduleName } from '..';
 import { InputUser } from '../../../components/Form/InputUser';
 
 interface DispatchProps {
@@ -60,11 +59,9 @@ export class Form extends React.Component<Props> {
         switch (action) {
             case FormAction.Edit:
                 updateNews(news);
-                history.push(`/admin/${moduleName}`);
                 break;
             case FormAction.Add:
                 createNews(news);
-                history.push(`/admin/${moduleName}`);
                 break;
         }
     }

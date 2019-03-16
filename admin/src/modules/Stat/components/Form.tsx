@@ -10,7 +10,6 @@ import { Action } from 'redux';
 import { connect } from '../../../../../common/utils/connect';
 import { StatExtended } from '../../../../../common/contracts/Stat';
 import { history } from '../../../history';
-import { moduleName } from '../index';
 import { InputNumber } from '../../../components/Form/InputNumber';
 import { InputUser } from '../../../components/Form/InputUser';
 
@@ -61,11 +60,9 @@ export class Form extends React.Component<Props> {
         switch (action) {
             case FormAction.Edit:
                 updateStat(user);
-                history.push(`/admin/${moduleName}`);
                 break;
             case FormAction.Add:
                 createStat(user);
-                history.push(`/admin/${moduleName}`);
                 break;
         }
     }

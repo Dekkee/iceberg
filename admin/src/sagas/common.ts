@@ -9,14 +9,14 @@ import { put, takeLatest, call } from 'redux-saga/effects';
 import { NewsResponse, NewsListResponse } from '../api/contracts';
 import { Action } from 'redux';
 import { CrudApi } from '../api/common';
+import { history } from '../history';
 
-export const generateSagas = <T>(actions: CrudActions, api: CrudApi<T>) => {
+export const generateSagas = <T>(moduleName: string, actions: CrudActions, api: CrudApi<T>) => {
     const handleFetch = function* (action: Action) {
         try {
             const response: NewsListResponse = yield call(api.list);
 
             yield put(actions.list.done(response));
-
         } catch (e) {
             yield put(actions.list.fail(e));
         }
@@ -28,6 +28,7 @@ export const generateSagas = <T>(actions: CrudActions, api: CrudApi<T>) => {
 
             yield put(actions.create.done());
 
+            history.push(`/admin/${moduleName}`);
         } catch (e) {
             yield put(actions.create.fail(e));
         }
@@ -37,7 +38,6 @@ export const generateSagas = <T>(actions: CrudActions, api: CrudApi<T>) => {
         try {
             const response: NewsResponse = yield call(api.get, action.id);
             yield put(actions.get.done(response));
-
         } catch (e) {
             yield put(actions.get.fail(e));
         }
@@ -49,6 +49,7 @@ export const generateSagas = <T>(actions: CrudActions, api: CrudApi<T>) => {
 
             yield put(actions.update.done(response));
 
+            history.push(`/admin/${moduleName}`);
         } catch (e) {
             yield put(actions.update.fail(e));
         }
@@ -59,6 +60,7 @@ export const generateSagas = <T>(actions: CrudActions, api: CrudApi<T>) => {
             yield call(api.delete, action.id);
 
             yield put(actions.remove.done());
+            history.push(`/admin/${moduleName}`);
         } catch (e) {
             yield put(actions.remove.fail(e));
         }

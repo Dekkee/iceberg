@@ -60,11 +60,9 @@ export class Form extends React.Component<Props> {
         switch (action) {
             case FormAction.Edit:
                 updateChamp(user);
-                history.push('/admin/champ');
                 break;
             case FormAction.Add:
                 createChamp(user);
-                history.push('/admin/champ');
                 break;
         }
     }
