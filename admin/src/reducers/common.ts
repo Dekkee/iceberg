@@ -1,4 +1,3 @@
-import { NewsExtended } from '../../../common/contracts/News';
 import { switchCase, switchReducer } from '../../../common/utils/reducers/switchReducer';
 import {
     CrudActions,
