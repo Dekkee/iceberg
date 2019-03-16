@@ -1,4 +1,4 @@
-import NewsRepository from "../schemas/NewsRepository";
+import { NewsRepository } from "../schemas/News";
 import { ACCESS_ADMIN_PAGES, adminUser } from "../roles/admin";
 import { Router } from "express";
 import * as passport from 'passport';

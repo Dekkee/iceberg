@@ -1,4 +1,5 @@
 import { model, Schema, Document } from 'mongoose';
+import CrudRepository from './CrudRepository';
 
 import { News as NewsContract } from '../../../common/contracts/News';
 
@@ -35,3 +36,9 @@ newsSchema.pre('findOne', function (next) {
 });
 
 export const News = model<NewsModel & Document>('News', newsSchema);
+
+export class NewsRepository extends CrudRepository<NewsModel & Document> {
+    constructor () {
+        super(News);
+    }
+}

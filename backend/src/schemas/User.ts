@@ -1,6 +1,7 @@
 import { model, Schema, Document } from "mongoose";
 import { pbkdf2Sync, randomBytes } from "crypto";
 
+import CrudRepository from './CrudRepository';
 import { UserExtended } from '../../../common/contracts/User';
 
 export interface UserModel extends UserExtended {
@@ -79,3 +80,9 @@ userSchema.pre('update', function (next) {
 });
 
 export const User = model<UserModel & Document>('User', userSchema);
+
+export class UserRepository extends CrudRepository<UserModel & Document> {
+    constructor () {
+        super(User);
+    }
+}
