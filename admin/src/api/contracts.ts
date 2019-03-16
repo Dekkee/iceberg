@@ -10,12 +10,6 @@ export interface UserListResponse {
 export interface UserResponse extends UserExtended {
 }
 
-export interface NewsListResponse {
-    result: NewsExtended[],
-    count: number,
-    receivedAt: number
-}
-
 export interface NewsResponse extends NewsExtended {
 }
 
