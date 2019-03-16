@@ -1,10 +1,8 @@
 import { model, Schema, Document } from "mongoose";
-import { pbkdf2Sync, randomBytes } from "crypto";
 
-import CrudRepository from './CrudRepository';
 import { AboutExtended } from '../../../common/contracts/About';
 
-export interface UserModel extends AboutExtended {
+export interface ContactsModel extends AboutExtended {
     [ index: string ]: any;
 }
 
@@ -24,10 +22,8 @@ const aboutSchema = new Schema({
             delete ret.__v;
             delete ret.relatedAt;
             delete ret.updatedAt;
-            delete ret.passwordHash;
-            delete ret.salt;
         }
     }
 });
 
-export const About = model<UserModel & Document>('About', aboutSchema);
+export const About = model<ContactsModel & Document>('About', aboutSchema);
