@@ -1,5 +1,5 @@
-import { Contacts } from "../schemas/Contacts";
-import { ACCESS_ADMIN_PAGES, adminUser } from "../roles/admin";
+import { Contacts } from "../../schemas/Contacts";
+import { ACCESS_ADMIN_PAGES, adminUser } from "../../roles/admin";
 import { Router } from "express";
 import * as passport from 'passport';
 

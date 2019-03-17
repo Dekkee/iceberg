@@ -4,7 +4,7 @@ import { jwtsecret } from '../auth/secret';
 import { Router } from 'express';
 
 export const setup = (router: Router) => {
-    router.post('/api/admin/login', passport.authenticate('local'), (req, res) => {
+    router.post('/api/login', passport.authenticate('local'), (req, res) => {
         if (req.user == false) {
             res.send('Login failed');
         } else {
@@ -19,7 +19,7 @@ export const setup = (router: Router) => {
         }
     });
 
-    router.get('/api/admin/custom', passport.authenticate('jwt'), (req, res) => {
+    router.get('/api/custom', passport.authenticate('jwt'), (req, res) => {
         if (req.user) {
             res.send(`hello ${req.user.displayName}`);
         } else {

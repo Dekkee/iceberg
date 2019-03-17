@@ -1,5 +1,5 @@
-import { ChampRepository } from "../schemas/Champ";
-import { ACCESS_ADMIN_PAGES, adminUser } from "../roles/admin";
+import { ChampRepository } from "../../schemas/Champ";
+import { ACCESS_ADMIN_PAGES, adminUser } from "../../roles/admin";
 import { Router } from "express";
 import * as passport from 'passport';
 

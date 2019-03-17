@@ -1,7 +1,7 @@
 import { createApi } from '../../../../../common/api/common';
 import { moduleName } from '..';
 
-export const api = createApi(moduleName);
+export const api = createApi('admin', moduleName);
 
 // remove unsupported methods
 api.get = api.list;

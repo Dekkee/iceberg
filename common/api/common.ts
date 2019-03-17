@@ -1,6 +1,6 @@
 import { select } from 'redux-saga/effects';
 import { tokenSelector } from '../../admin/src/selectors/auth';
-import { checkStatus, resolveUrl } from '../../admin/src/api';
+import { checkStatus, resolveUrl } from '.';
 import { ListResponse } from './contracts';
 
 export interface CrudApi<T> {
@@ -11,10 +11,10 @@ export interface CrudApi<T> {
     delete: (id: string) => IterableIterator<string>;
 }
 
-export const createApi = <T>(name: string): CrudApi<T> => ({
+export const createApi = <T> (type: string, name: string): CrudApi<T> => ({
     list: function* () {
         const { token } = yield select(tokenSelector);
-        const response = yield fetch(resolveUrl(name), {
+        const response = yield fetch(resolveUrl(name, type), {
             headers: {
                 'Authorization': token
             }
@@ -25,7 +25,7 @@ export const createApi = <T>(name: string): CrudApi<T> => ({
 
     get: function* (id: string) {
         const { token } = yield select(tokenSelector);
-        const response = yield fetch(resolveUrl(`${name}/${ id }`), {
+        const response = yield fetch(resolveUrl(`${name}/${ id }`, type), {
             headers: {
                 'Authorization': token
             }
@@ -36,7 +36,7 @@ export const createApi = <T>(name: string): CrudApi<T> => ({
 
     create: function* (entity: T) {
         const { token } = yield select(tokenSelector);
-        const response = yield fetch(resolveUrl(name), {
+        const response = yield fetch(resolveUrl(name, type), {
             method: 'POST',
             headers: {
                 'Authorization': token,
@@ -50,7 +50,7 @@ export const createApi = <T>(name: string): CrudApi<T> => ({
 
     update: function* (entity: T) {
         const { token } = yield select(tokenSelector);
-        const response = yield fetch(resolveUrl(name), {
+        const response = yield fetch(resolveUrl(name, type), {
             method: 'PUT',
             headers: {
                 'Authorization': token,
@@ -64,7 +64,7 @@ export const createApi = <T>(name: string): CrudApi<T> => ({
 
     delete: function* (id: string) {
         const { token } = yield select(tokenSelector);
-        const response = yield fetch(resolveUrl(`${name}/${ id }`), {
+        const response = yield fetch(resolveUrl(`${name}/${ id }`, type), {
             method: 'DELETE',
             headers: {
                 'Authorization': token

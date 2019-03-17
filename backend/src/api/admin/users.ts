@@ -1,5 +1,5 @@
-import { UserRepository } from "../schemas/User";
-import { ACCESS_ADMIN_PAGES, adminUser } from "../roles/admin";
+import { UserRepository } from "../../schemas/User";
+import { ACCESS_ADMIN_PAGES, adminUser } from "../../roles/admin";
 import { Router } from "express";
 import * as passport from 'passport';
 
