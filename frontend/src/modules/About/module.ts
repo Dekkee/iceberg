@@ -9,5 +9,5 @@ export const moduleDeclaration: ModuleDeclaration = {
     reducer,
     component,
     name: moduleName,
-    label: 'About',
+    label: 'О команде',
 };
