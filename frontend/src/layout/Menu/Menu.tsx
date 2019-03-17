@@ -43,7 +43,6 @@ export class Menu extends React.Component<Props & WithStyles> {
                         <Button color="inherit" aria-label="Crew">Состав</Button>
                         <Button color="inherit" aria-label="Champs">Турниры</Button>
                         <Button color="inherit" aria-label="Stats">Статистика</Button>
-                        <Button color="inherit" aria-label="Contacts">Контакты</Button>
                         <Typography variant="h6" color="inherit" className={ classes.grow }/>
                         <Button color="inherit">Вступить в комманду</Button>
                         <Button color="inherit" aria-label="Users"

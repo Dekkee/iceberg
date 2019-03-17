@@ -9,6 +9,5 @@ export const moduleDeclaration: ModuleDeclaration = {
     reducer,
     component,
     name: moduleName,
-    // added nonbreakable space
-    label: 'О команде'.replace(/ /g, "\u00a0"),
+    label: 'Контакты',
 };
