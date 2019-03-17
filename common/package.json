@@ -5,13 +5,14 @@
   "license": "MIT",
   "dependencies": {
     "@types/lodash": "^4.14.117",
-    "@types/react-redux": "^6.0.9",
+    "history": "^4.9.0",
     "lodash-es": "^4.17.11",
     "react": "^16.5.2",
     "react-redux": "^5.0.7",
-    "react-router": "^4.4.0",
-    "react-router-dom": "^4.4.0",
     "redux": "^4.0.1",
     "redux-saga": "^1.0.2"
-  }
+  },
+  "exclude": [
+    "./node_modules"
+  ]
 }

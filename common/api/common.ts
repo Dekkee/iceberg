@@ -1,5 +1,5 @@
 import { select } from 'redux-saga/effects';
-import { tokenSelector } from '../../admin/src/selectors/auth';
+import { tokenSelector } from '../selectors/auth';
 import { checkStatus, resolveUrl } from '.';
 import { ListResponse } from './contracts';
 

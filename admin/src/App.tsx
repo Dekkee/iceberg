@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Menu } from './layout/Menu';
 import { Route, Switch, withRouter } from 'react-router';
-import { authSelector, tokenSelector } from './selectors/auth';
+import { authSelector, tokenSelector } from '../../common/selectors/auth';
 import { actions } from '../../common/actions/auth';
 import { connect } from '../../common/utils/connect';
 import { Action } from 'redux';

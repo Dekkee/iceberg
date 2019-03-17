@@ -3,7 +3,8 @@ import { createLogger } from 'redux-logger';
 import { createStore, applyMiddleware, Store, Action, compose } from 'redux';
 
 import { root } from '../sagas';
-import { State, reducer } from '../reducers';
+import { reducer } from '../reducers';
+import { State } from '../../../common/reducers';
 
 export const configureStore = (): Store<{}> => {
     const sagaMW = sagaMiddleware();

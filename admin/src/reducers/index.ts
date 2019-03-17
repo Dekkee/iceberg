@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import * as auth from '../../../common/reducers/auth';
+import { State } from '../../../common/reducers';
 
 import { modules } from '../modules';
 
@@ -8,6 +9,3 @@ export const reducer = combineReducers<State>({
     ...modules.reduce((a, m) => ({...a, [m.name]: m.reducer}), {})
 });
 
-export interface State {
-    token: auth.TokenState,
-}

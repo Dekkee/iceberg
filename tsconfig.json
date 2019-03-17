@@ -8,5 +8,8 @@
     "strict": false,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
-  }
+  },
+  "exclude": [
+    "./node_modules"
+  ]
 }

@@ -1,9 +1,9 @@
 import { switchCase, switchReducer } from '../utils/reducers/switchReducer';
 import {
     actions,
-    AuthenticateActionInit,
     AuthenticateActionDone,
     AuthenticateActionFail,
+    AuthenticateActionInit,
     CancelAuthenticationAction,
     LogoutAction,
     RefreshAuthenticationAction,
@@ -59,3 +59,4 @@ export const tokenReducer = persistReducer('auth', switchReducer<TokenState>({
         user: undefined,
     })),
 }, {}));
+
