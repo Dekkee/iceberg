@@ -1,11 +1,10 @@
-import { About } from "../schemas/About";
+import { Contacts } from "../schemas/Contacts";
 import { Router } from "express";
-import * as passport from 'passport';
 
 export const setup = (router: Router) => {
     router.get('/api/contacts', async (req, res) => {
         try {
-            const about = await About.findOne();
+            const about = await Contacts.findOne();
             res.send(about || {});
         }
         catch (err) {
