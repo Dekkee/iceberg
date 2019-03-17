@@ -5,7 +5,7 @@ import * as mongoose from 'mongoose';
 import * as morgan from 'morgan';
 import * as cors from 'cors';
 import * as serve from 'serve-static';
-import { setup as setupAdminApi } from './api/admin';
+import { setup as setupAdminApi } from './api';
 import { setup as setupPassport } from './auth';
 import { User } from './schemas/User';
 import { adminUser } from './roles/admin';
