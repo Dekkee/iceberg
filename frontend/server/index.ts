@@ -11,13 +11,13 @@ const app = express()
 app.use(compression({ threshold: 0 }));
 app.use(express.static('dist'));
 
-app.get('*', function (req, resp) {
-    resp.status(404).send({
-        message: 'NOT_FOUND',
-        method: req.method,
-        url: req.url
-    });
-});
+// app.get('*', function (req, resp) {
+//     resp.status(404).send({
+//         message: 'NOT_FOUND',
+//         method: req.method,
+//         url: req.url
+//     });
+// });
 
 const port = 8082;
 

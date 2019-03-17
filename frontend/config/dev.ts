@@ -13,7 +13,8 @@ export const config = {
         compress: true,
         contentBase: './dist',
         hot: true,
-        port: 8082
+        port: 8082,
+        historyApiFallback: true,
     },
     devtool: 'cheap-source-map',
 };
