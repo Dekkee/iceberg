@@ -1,6 +1,6 @@
 import { Action } from 'redux';
 import { AuthenticationResponse } from '../api/contracts';
-import { action, initActionCreators } from '../../../common/utils/actions/actionCreatorFactory';
+import { action, initActionCreators } from '../utils/actions/actionCreatorFactory';
 
 export interface AuthenticateActionInit extends Action {
     email: string;

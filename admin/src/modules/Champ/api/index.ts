@@ -1,4 +1,4 @@
-import { createApi } from '../../../api/common';
+import { createApi } from '../../../../../common/api/common';
 import { moduleName } from '..';
 
 export const api = createApi(moduleName);

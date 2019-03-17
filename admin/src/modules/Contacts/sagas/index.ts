@@ -5,8 +5,8 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 import {
     EntityGetActionInit,
     EntityUpdateActionInit
-} from '../../../actions/common';
-import { history } from '../../../history';
+} from '../../../../../common/actions/common';
+import { history } from '../../../../../common/history';
 import { ContactsExtended } from '../../../../../common/contracts/Contacts';
 
 export const saga = function* saga() {

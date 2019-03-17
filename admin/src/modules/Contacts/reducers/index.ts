@@ -8,7 +8,7 @@ import {
     EntityUpdateActionDone,
     EntityUpdateActionFail,
     EntityUpdateActionInit
-} from '../../../actions/common';
+} from '../../../../../common/actions/common';
 
 export interface EntityState {
     entity?: ContactsExtended;

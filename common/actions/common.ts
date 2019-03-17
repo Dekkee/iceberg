@@ -1,6 +1,6 @@
 import { Action } from 'redux';
 import { ListResponse } from '../api/contracts';
-import { action, ActionCreator, initActionCreators } from '../../../common/utils/actions/actionCreatorFactory';
+import { action, ActionCreator, initActionCreators } from '../utils/actions/actionCreatorFactory';
 
 export interface CrudActions {
     list: AsyncAction;

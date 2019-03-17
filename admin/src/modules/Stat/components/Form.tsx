@@ -9,7 +9,7 @@ import { actions } from '../actions';
 import { Action } from 'redux';
 import { connect } from '../../../../../common/utils/connect';
 import { StatExtended } from '../../../../../common/contracts/Stat';
-import { history } from '../../../history';
+import { history } from '../../../../../common/history';
 import { InputNumber } from '../../../components/Form/InputNumber';
 import { InputUser } from '../../../components/Form/InputUser';
 

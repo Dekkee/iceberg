@@ -9,7 +9,7 @@ import { actions } from '../actions';
 import { Action } from 'redux';
 import { connect } from '../../../../../common/utils/connect';
 import { ContactsExtended } from '../../../../../common/contracts/Contacts';
-import { history } from '../../../history';
+import { history } from '../../../../../common/history';
 
 interface DispatchProps {
     getContacts?: (id: string) => Action;

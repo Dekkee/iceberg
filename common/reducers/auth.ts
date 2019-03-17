@@ -1,4 +1,4 @@
-import { switchCase, switchReducer } from '../../../common/utils/reducers/switchReducer';
+import { switchCase, switchReducer } from '../utils/reducers/switchReducer';
 import {
     actions,
     AuthenticateActionInit,
@@ -10,7 +10,7 @@ import {
     RefreshAuthenticationActionDone,
     RefreshAuthenticationActionFail
 } from '../actions/auth';
-import { persistReducer } from '../../../common/utils/reducers/persistReducer';
+import { persistReducer } from '../utils/reducers/persistReducer';
 
 export interface AuthState {
     isAuthenticated: boolean;

@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import { Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { App } from './App';
-import { history } from './history';
+import { history } from '../../common/history';
 import { configureStore } from './store';
 
 const store = configureStore();

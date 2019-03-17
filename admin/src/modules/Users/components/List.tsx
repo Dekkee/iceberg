@@ -18,7 +18,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import { selector } from '../selectors';
 import { UserExtended } from '../../../../../common/contracts/User';
 import { RouteComponentProps, withRouter } from 'react-router';
-import { history } from '../../../history';
+import { history } from '../../../../../common/history';
 import { compose } from 'recompose';
 import { withStyles } from '@material-ui/core';
 import { WithStyles } from '../../../../../common/utils/styles/WithStyles';

@@ -1,4 +1,4 @@
-import { AuthenticationResponse } from './contracts';
+import { AuthenticationResponse } from '../../../common/api/contracts';
 
 const endPoint = '//localhost:3000/api/admin';
 // process.env.API_HOST && process.env.HOST_PORT ?

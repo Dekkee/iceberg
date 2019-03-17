@@ -1,6 +1,6 @@
 import { all, fork } from 'redux-saga/effects';
 
-import { saga as authSaga } from './auth';
+import { saga as authSaga } from '../../../common/sagas/auth';
 
 import { modules } from '../modules';
 

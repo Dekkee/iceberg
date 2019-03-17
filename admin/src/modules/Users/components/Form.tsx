@@ -11,7 +11,7 @@ import { actions } from '../actions';
 import { Action } from 'redux';
 import { connect } from '../../../../../common/utils/connect';
 import { UserExtended } from '../../../../../common/contracts/User';
-import { history } from '../../../history';
+import { history } from '../../../../../common/history';
 
 interface DispatchProps {
     getUser?: (id: string) => Action;

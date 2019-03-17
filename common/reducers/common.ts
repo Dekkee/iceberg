@@ -1,4 +1,4 @@
-import { switchCase, switchReducer } from '../../../common/utils/reducers/switchReducer';
+import { switchCase, switchReducer } from '../utils/reducers/switchReducer';
 import {
     CrudActions,
     EntityCreateActionDone,

@@ -1,6 +1,6 @@
 import { select } from 'redux-saga/effects';
-import { tokenSelector } from '../selectors/auth';
-import { checkStatus, resolveUrl } from './index';
+import { tokenSelector } from '../../admin/src/selectors/auth';
+import { checkStatus, resolveUrl } from '../../admin/src/api';
 import { ListResponse } from './contracts';
 
 export interface CrudApi<T> {

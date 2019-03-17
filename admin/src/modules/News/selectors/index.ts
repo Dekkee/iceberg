@@ -1,4 +1,4 @@
-import { EntityState } from '../../../reducers/common';
+import { EntityState } from '../../../../../common/reducers/common';
 import { NewsExtended } from '../../../../../common/contracts/News';
 import { moduleName } from '..';
 

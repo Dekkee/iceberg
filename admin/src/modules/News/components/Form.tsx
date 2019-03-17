@@ -9,7 +9,7 @@ import { actions } from '../actions';
 import { Action } from 'redux';
 import { connect } from '../../../../../common/utils/connect';
 import { NewsExtended } from '../../../../../common/contracts/News';
-import { history } from '../../../history';
+import { history } from '../../../../../common/history';
 import { InputUser } from '../../../components/Form/InputUser';
 
 interface DispatchProps {

@@ -1,4 +1,4 @@
-import { AuthState as AuthState, TokenState } from '../reducers/auth';
+import { AuthState as AuthState, TokenState } from '../../../common/reducers/auth';
 import { State } from '../reducers';
 
 export const tokenSelector = (state: State): TokenState => state.token;

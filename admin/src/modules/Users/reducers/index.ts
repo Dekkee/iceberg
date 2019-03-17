@@ -1,4 +1,4 @@
-import { EntityState, generateReducer } from '../../../reducers/common';
+import { EntityState, generateReducer } from '../../../../../common/reducers/common';
 import { actions } from '../actions';
 import { UserExtended } from '../../../../../common/contracts/User';
 

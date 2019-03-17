@@ -1,7 +1,7 @@
 import { actions, RefreshAuthenticationAction } from '../actions/auth';
 import { put, takeLatest, call } from 'redux-saga/effects';
 import { AuthenticationResponse } from '../api/contracts';
-import { login, refresh } from '../api';
+import { login, refresh } from '../../admin/src/api';
 import { AuthenticateActionInit, LogoutAction } from '../actions/auth';
 import { history } from '../history';
 

@@ -1,4 +1,4 @@
-import { EntityState } from '../../../reducers/common';
+import { EntityState } from '../../../../../common/reducers/common';
 import { AboutExtended } from '../../../../../common/contracts/About';
 import { moduleName } from '..';
 

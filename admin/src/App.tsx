@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Menu } from './layout/Menu';
 import { Route, Switch, withRouter } from 'react-router';
 import { authSelector, tokenSelector } from './selectors/auth';
-import { actions } from './actions/auth';
+import { actions } from '../../common/actions/auth';
 import { connect } from '../../common/utils/connect';
 import { Action } from 'redux';
 import TextField from '@material-ui/core/TextField/TextField';
@@ -10,7 +10,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { compose } from 'recompose';
 import { ChangeEvent } from 'react';
 import Button from '@material-ui/core/Button/Button';
-import { AuthState, TokenState } from './reducers/auth';
+import { AuthState, TokenState } from '../../common/reducers/auth';
 import { WithStyles } from '../../common/utils/styles/WithStyles';
 import { modules } from './modules';
 
