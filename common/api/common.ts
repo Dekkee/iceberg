@@ -11,7 +11,12 @@ export interface CrudApi<T> {
     delete: (id: string) => IterableIterator<string>;
 }
 
-export const createApi = <T> (type: string, name: string): CrudApi<T> => ({
+export interface GetListApi<T> {
+    list: () => IterableIterator<ListResponse<T>>;
+    get: (id: string) => IterableIterator<T>;
+}
+
+export const createCrudListApi = <T> (type: string, name: string): CrudApi<T> => ({
     list: function* () {
         const { token } = yield select(tokenSelector);
         const response = yield fetch(resolveUrl(name, type), {
@@ -73,4 +78,18 @@ export const createApi = <T> (type: string, name: string): CrudApi<T> => ({
         checkStatus(response);
         return yield response.text();
     }
+});
+
+export const createPublicGetListApi = <T> (type: string, name: string): GetListApi<T> => ({
+    list: function* () {
+        const response = yield fetch(resolveUrl(name, type));
+        checkStatus(response);
+        return yield response.json();
+    },
+
+    get: function* (id: string) {
+        const response = yield fetch(resolveUrl(`${name}/${ id }`, type));
+        checkStatus(response);
+        return yield response.json();
+    },
 });

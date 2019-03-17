@@ -1,4 +1,4 @@
-import { createApi } from '../../../../../common/api/common';
+import { createCrudListApi } from '../../../../../common/api/common';
 import { moduleName } from '..';
 
-export const api = createApi('admin', moduleName);
+export const api = createCrudListApi('admin', moduleName);
